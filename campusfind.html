@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>CampusFind</title>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-secondary-fixed":"#301400","surface-container-highest":"#dce2f3","surface-container":"#e7eefe","on-background":"#151c27","inverse-primary":"#eabda0","surface-bright":"#f9f9ff","secondary-fixed":"#ffdcc5","secondary-fixed-dim":"#f4bb92","secondary":"#805533","on-tertiary-container":"#e9c58b","on-secondary":"#ffffff","on-primary-container":"#eec1a4","on-surface-variant":"#50453e","primary-container":"#6f4e37","surface-container-lowest":"#ffffff","on-secondary-container":"#794e2e","tertiary":"#513a0d","on-primary":"#ffffff","surface-dim":"#d3daea","on-surface":"#151c27","inverse-on-surface":"#ebf1ff","inverse-surface":"#2a313d","error":"#ba1a1a","error-container":"#ffdad6","primary-fixed":"#ffdcc6","primary":"#553722","on-tertiary-fixed-variant":"#5b4315","on-primary-fixed":"#2d1604","on-secondary-fixed-variant":"#653d1e","secondary-container":"#fdc39a","surface-container-low":"#f0f3ff","outline-variant":"#d4c3ba","on-tertiary-fixed":"#271900","surface-tint":"#79573f","background":"#f9f9ff","surface-container-high":"#e2e8f8","on-error-container":"#93000a","primary-fixed-dim":"#eabda0","surface":"#f9f9ff","on-tertiary":"#ffffff","on-primary-fixed-variant":"#5f402a","surface-variant":"#dce2f3","tertiary-fixed-dim":"#e5c188","on-error":"#ffffff","tertiary-fixed":"#ffdea9","outline":"#82746d","tertiary-container":"#6b5122"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-xl":"2.5rem","margin-mobile":"1rem","gutter":"1.5rem","space-sm":"0.5rem","margin":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter-mobile":"1rem"},"fontFamily":{"label-md":["Inter"],"label-lg":["Inter"],"headline-md":["Epilogue"],"headline-sm":["Epilogue"],"body-sm":["Inter"],"display-mobile":["Epilogue"],"label-sm":["Inter"],"body-lg":["Inter"],"display":["Epilogue"],"body-md":["Inter"],"headline-lg-mobile":["Epilogue"],"headline-lg":["Epilogue"],"title-lg":["Epilogue"]},"fontSize":{"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"display-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"display":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-lg-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"title-lg":["18px",{"lineHeight":"26px","fontWeight":"500"}]}}}};</script>
+<style>
+body{font-family:Inter,sans-serif;overscroll-behavior:none}
+h1,h2,h3{font-family:Epilogue,sans-serif}
+.material-symbols-outlined{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;line-height:1;display:inline-block;letter-spacing:normal;white-space:nowrap}
+.ms{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;line-height:1;display:inline-block;letter-spacing:normal;white-space:nowrap}
+.hidden{display:none!important}
+.inp{width:100%;height:46px;padding:0 12px 0 40px;border-radius:12px;background:#f0f3ff;font-size:14px;outline:none;transition:.15s;border:1px solid transparent}
+.inp:focus{background:#fff;border-color:#6f4e3744;box-shadow:0 0 0 3px #55372215}
+.inp.bad{background:#ffdad666;border-color:#ba1a1a66}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:9999px;font-size:11px;font-weight:500;background:#e7eefe;color:#50453e;transition:.2s}
+.pill.ok{background:#ffdea9;color:#271900}
+.err{color:#ba1a1a;font-size:12px;display:flex;align-items:center;gap:4px;margin-top:2px}
+.chk{width:20px;height:20px;appearance:none;border-radius:5px;border:1.5px solid #82746d;background:#fff;cursor:pointer;flex-shrink:0}
+.chk:checked{background:#553722;border-color:#553722}
+.otp{width:44px;height:52px;text-align:center;font-size:20px;font-weight:600;border-radius:10px;background:#f0f3ff;border:1px solid transparent;outline:none;transition:.15s}
+.otp:focus{background:#fff;border-color:#6f4e3744;box-shadow:0 0 0 3px #55372215}
+.otp.bad{background:#ffdad666;border-color:#ba1a1a66}
+</style></head>
+<body class="bg-surface text-on-surface antialiased min-h-screen">
+<main id="auth-root" class="max-w-md mx-auto w-full px-4 pt-3 pb-10">
+
+<!-- Brand -->
+<div class="flex flex-col items-center text-center mb-4">
+  <img alt="CampusFind Logo" class="h-10 w-auto object-contain mb-1.5" src="https://lh3.googleusercontent.com/aida/AEtjO1Unhh1lFTNbaeViFNKqvg8kp0LgTOZLskc6tOaO5EyxEmAyh56T1Z_J8aqATVrQ85u8V9mOkyzYvVg4AaQ0oydF1xW6GZ2niieWuf5LCS1N33bJpt-PKPcSjAqIGiM2pT1I9mLnwrvpYZPPgLlhkFrcIdB9Sr24i4UzAlFyBn3kBDMtcI807QcYLEK5aFdtZTP8la5Z6OS1-1XTWO0Cv8sjvpWW4esYljUbgwE6LETtpRjHbnk7uV8-rO8"/>
+  <p class="text-sm text-on-surface-variant flex items-center gap-1.5"><span class="ms text-primary text-[18px]">qr_code_2</span>Lost something? Let's help you find it.</p>
+</div>
+
+<!-- ============ SIGN IN VIEW ============ -->
+<section id="view-signin">
+  <div class="relative overflow-hidden rounded-2xl bg-primary-container text-white p-5 mb-5 shadow-md">
+    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/40 text-tertiary-fixed text-[11px] font-medium uppercase tracking-wider mb-1.5"><span class="ms text-xs">school</span> Central Registry</span>
+    <h1 class="text-[26px] leading-8 font-bold">Welcome Back!</h1>
+    <p class="text-xs text-primary-fixed mt-1 mb-3">Your campus community is here to help you reconnect with what matters.</p>
+    <div class="w-full h-32 rounded-xl overflow-hidden bg-primary/30 relative">
+      <img alt="Student searching for lost keys" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1XYyswcrsUK-B6-8lJXFODbF9vNlzTJMSFeutC4BuW5WjSitibV_hYy5gqp6GTuEzUCw3xRyuWgRAZUnzi_OM8uI6y0qsHE2-XxyXw5RsySqAxHT9rpbr5fDTy41tStU7Lz-cKfN2LEuid6bZcCmsozwn3U4qiN16XRioz0WFW2wS2xHu0ylUworLmtPZ9k9NnNHsNgSOdNZZNPJQBWyGfiLzRnLg1DlqmiURULICCKgouURBJitalNjuo"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
+      <div class="absolute bottom-2 left-3 flex items-center gap-1.5 text-[11px] text-primary-fixed"><span class="ms text-sm text-tertiary-fixed">verified_user</span>1,420+ items reunited this semester</div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-2xl p-6 shadow-sm">
+    <h2 class="text-xl font-bold text-primary">Sign in to CampusFind</h2>
+    <p class="text-xs text-on-surface-variant mt-1 mb-4">Access your account and manage your lost and found reports.</p>
+    <div id="si-alert" class="hidden rounded-xl p-3 mb-4 items-start gap-2 text-xs font-medium" style="display:none"></div>
+    <form id="si-form" class="flex flex-col gap-4" novalidate>
+      <div>
+        <label class="text-sm font-semibold text-primary flex items-center gap-1.5 mb-1.5" for="si-email"><span class="ms text-secondary text-base">alternate_email</span>University or Personal Email</label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-lg pointer-events-none">mail</span>
+        <input id="si-email" class="inp" type="email" autocomplete="email" placeholder="e.g. j.smith@university.edu"/></div>
+        <p id="si-email-err" class="err hidden"><span class="ms text-xs">error</span><span>Please enter a valid email address.</span></p>
+      </div>
+      <div>
+        <label class="text-sm font-semibold text-primary flex items-center gap-1.5 mb-1.5" for="si-pass"><span class="ms text-secondary text-base">lock</span>Password</label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-lg pointer-events-none">vpn_key</span>
+        <input id="si-pass" class="inp pr-11" type="password" autocomplete="current-password" placeholder="Enter your password"/>
+        <button type="button" data-toggle="si-pass" aria-label="Toggle password visibility" class="absolute right-2 p-1.5 text-outline hover:text-primary"><span class="ms text-lg">visibility</span></button></div>
+        <p id="si-pass-err" class="err hidden"><span class="ms text-xs">error</span><span>Password must be at least 6 characters long.</span></p>
+      </div>
+      <div class="flex items-center justify-between">
+        <label class="flex items-center gap-2 cursor-pointer select-none"><input id="si-remember" type="checkbox" class="chk" style="width:16px;height:16px"/><span class="text-xs font-semibold text-on-surface-variant">Remember me</span></label>
+        <button type="button" id="forgot-btn" class="text-xs font-semibold text-secondary hover:text-primary">Forgot password?</button>
+      </div>
+      <button id="si-submit" type="submit" class="w-full py-3.5 rounded-xl bg-primary-container hover:bg-primary text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition active:scale-[.99]">
+        <span id="si-spin" class="ms text-lg animate-spin hidden">progress_activity</span><span id="si-text">Sign In</span></button>
+    </form>
+    <p class="mt-6 text-center text-xs text-on-surface-variant">Don't have an account? <button type="button" data-go="signup" class="text-sm font-semibold text-secondary hover:text-primary ml-1 underline">Create an account</button></p>
+  </div>
+  <div class="mt-6 text-center px-4">
+    <div class="flex items-center justify-center gap-1.5 text-outline mb-1"><span class="ms text-sm">shield</span><span class="text-[11px] uppercase tracking-wider">Official Campus Network</span></div>
+    <p class="text-xs text-on-surface-variant">Managed in collaboration with Campus Public Safety &amp; University Student Libraries.</p>
+  </div>
+</section>
+
+<!-- ============ SIGN UP VIEW ============ -->
+<section id="view-signup" class="hidden">
+  <div class="w-full bg-primary-container text-white rounded-xl overflow-hidden shadow-md">
+    <div class="p-4 flex flex-col gap-1">
+      <div class="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full bg-secondary-container/30 text-tertiary-fixed text-[11px] font-medium"><span class="ms text-[14px]">verified</span>Verified Student Network • 1,200+ Reunited</div>
+      <h1 class="text-2xl font-semibold mt-1">Join CampusFind</h1>
+      <p class="text-xs text-primary-fixed-dim max-w-[280px]" style="color:#eabda0">Be part of a campus community helping lost belongings find their way home.</p>
+    </div>
+    <div class="w-full h-32 bg-primary relative">
+      <img alt="Campus Reconnect Illustration" class="w-full h-full object-cover opacity-95" src="https://lh3.googleusercontent.com/aida/AEtjO1Wxkim8D8SvxdLUjC6DCj45xxqUJkz9CwcQLYLa1JUkIlEsbfXf52As-RPFONZO66SEVLrVrunjrSUHtW591bqnp9LcIAIgYWOYoRmybYmufMFwPByRbBmDSW1xIqbjBwAAlsvLxuAXk4JF4Rx7mURAOdbJ4Y7QkrpZPSRPSmDYWeLSEnlmC4n5IehPFlxy632RI_xVIcqysulIug2s6hSpCcKfkURenklgjpv5l9K6LogDzdBIhcE1xeg"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-primary-container via-transparent to-transparent"></div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md p-4 mt-4">
+    <h2 class="text-lg font-medium">Create Your Account</h2>
+    <p class="text-xs text-on-surface-variant mt-0.5 mb-4">Create an account to report and manage lost or found items.</p>
+    <form id="su-form" class="flex flex-col gap-4" novalidate>
+      <div>
+        <label class="text-sm font-semibold mb-1 block" for="su-name">Full Name <span class="text-error">*</span></label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-[20px] pointer-events-none">person</span>
+        <input id="su-name" class="inp" type="text" autocomplete="name" placeholder="Enter your full name"/></div>
+        <p id="su-name-err" class="err hidden"><span class="ms text-[16px]">error</span><span>Please enter your full name.</span></p>
+      </div>
+      <div>
+        <label class="text-sm font-semibold mb-1 block" for="su-email">University or Personal Email <span class="text-error">*</span></label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-[20px] pointer-events-none">mail</span>
+        <input id="su-email" class="inp" type="email" autocomplete="email" placeholder="Enter your email address"/></div>
+        <p id="su-email-err" class="err hidden"><span class="ms text-[16px]">error</span><span id="su-email-err-t">Please enter a valid university or personal email.</span></p>
+      </div>
+      <div>
+        <div class="flex justify-between items-baseline mb-1"><label class="text-sm font-semibold" for="su-sid">Student ID</label><span class="text-[11px] text-on-surface-variant">Required</span></div>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-[20px] pointer-events-none">badge</span>
+        <input id="su-sid" class="inp" type="text" placeholder="e.g. SC200/0000/2024" autocomplete="off"/></div>
+        <p id="su-sid-err" class="err hidden"><span class="ms text-[16px]">error</span><span id="su-sid-err-t">Please enter your student ID.</span></p>
+        <p class="text-xs text-on-surface-variant mt-1 flex items-center gap-1"><span class="ms text-[14px] text-tertiary">info</span>Only registered students of this campus can sign up.</p>
+      </div>
+      <div>
+        <label class="text-sm font-semibold mb-1 block" for="su-pass">Password <span class="text-error">*</span></label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-[20px] pointer-events-none">lock</span>
+        <input id="su-pass" class="inp pr-11" type="password" autocomplete="new-password" placeholder="Create a strong password"/>
+        <button type="button" data-toggle="su-pass" aria-label="Toggle password visibility" class="absolute right-2 p-1 text-outline hover:text-on-surface"><span class="ms text-[20px]">visibility</span></button></div>
+        <div class="flex flex-wrap gap-1.5 mt-1.5">
+          <span class="pill" id="pill-len"><span class="ms text-[14px]">check_circle</span>8+ characters</span>
+          <span class="pill" id="pill-num"><span class="ms text-[14px]">check_circle</span>1 number or symbol</span>
+        </div>
+        <p id="su-pass-err" class="err hidden"><span class="ms text-[16px]">error</span><span>Password must meet the required criteria.</span></p>
+      </div>
+      <div>
+        <label class="text-sm font-semibold mb-1 block" for="su-conf">Confirm Password <span class="text-error">*</span></label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-[20px] pointer-events-none">lock_reset</span>
+        <input id="su-conf" class="inp pr-11" type="password" autocomplete="new-password" placeholder="Re-enter your password"/>
+        <button type="button" data-toggle="su-conf" aria-label="Toggle confirm password visibility" class="absolute right-2 p-1 text-outline hover:text-on-surface"><span class="ms text-[20px]">visibility</span></button></div>
+        <div id="su-match" class="hidden items-center gap-1 mt-1 text-xs"><span class="ms text-[16px]" id="su-match-i"></span><span id="su-match-t"></span></div>
+        <p id="su-conf-err" class="err hidden"><span class="ms text-[16px]">error</span><span>Passwords do not match.</span></p>
+      </div>
+      <div>
+        <label class="flex items-start gap-2.5 cursor-pointer">
+          <span class="relative flex items-center justify-center mt-0.5"><input id="su-terms" type="checkbox" class="chk"/><span id="su-tick" class="ms text-white text-[16px] pointer-events-none absolute hidden">check</span></span>
+          <span class="text-xs text-on-surface-variant leading-snug">I agree to the <button type="button" data-doc="terms" class="text-secondary font-semibold underline hover:text-primary">Terms of Use</button> and <button type="button" data-doc="privacy" class="text-secondary font-semibold underline hover:text-primary">Privacy Policy</button>.</span>
+        </label>
+        <p id="su-terms-err" class="err hidden"><span class="ms text-[16px]">error</span><span>Please agree to the terms to continue.</span></p>
+      </div>
+      <div class="flex flex-col gap-2 mt-1">
+        <button id="su-submit" type="submit" class="w-full h-12 bg-primary-container hover:bg-primary text-white rounded-lg text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition active:scale-[.99]">
+          <span id="su-text">Create Account</span><span id="su-spin" class="ms text-xl animate-spin hidden">progress_activity</span></button>
+        <p class="text-center text-xs text-on-surface-variant">Already have an account? <button type="button" data-go="signin" class="text-secondary hover:text-primary text-sm font-semibold ml-1 underline">Sign in</button></p>
+      </div>
+    </form>
+  </div>
+  <div class="mt-5 flex items-center justify-center gap-2 text-on-surface-variant text-center">
+    <span class="ms text-tertiary-container text-[18px]">security</span><span class="text-xs">Student identities are protected via campus custodian ledger.</span>
+  </div>
+</section>
+
+<!-- ============ FORGOT PASSWORD VIEW ============ -->
+<section id="view-forgot" class="hidden">
+  <div class="relative overflow-hidden rounded-2xl bg-primary-container text-white p-5 shadow-md">
+    <div class="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-secondary-container/10 pointer-events-none"></div>
+    <div class="absolute -bottom-8 -left-8 w-28 h-28 rounded-full bg-primary/20 pointer-events-none"></div>
+    <div class="relative z-10 flex flex-col gap-3">
+      <span class="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full bg-primary/40 text-tertiary-fixed text-[11px] font-medium uppercase tracking-wider"><span class="ms text-[14px]">lock</span>Secure account recovery</span>
+      <div>
+        <h1 class="text-2xl font-bold">Reset Your Password</h1>
+        <p class="text-xs mt-1 leading-relaxed" style="color:#eabda0">Enter the email you signed up with. We'll email you a 6-digit code to confirm it's you, then you can choose a new password.</p>
+      </div>
+      <div class="flex items-center gap-3 rounded-xl bg-primary/30 p-3">
+        <div class="relative bg-white p-3 rounded-2xl shadow-md flex items-center justify-center"><span class="ms text-primary-container text-[34px]" style="font-variation-settings:'FILL' 1">lock</span>
+          <span class="absolute -bottom-1.5 -right-2 bg-tertiary-fixed text-on-tertiary-fixed p-1 rounded-lg shadow flex"><span class="ms text-[16px]">mail</span></span></div>
+        <div class="text-[11px] text-primary-fixed leading-relaxed pl-2">Check your inbox and your spam folder for the code.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-2xl p-5 shadow-md mt-4 flex flex-col gap-4">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-bold text-primary">Password Recovery</h2>
+      <span id="fp-badge" class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-secondary-container text-on-secondary-container">Step 1 of 3</span>
+    </div>
+    <div id="fp-alert" class="hidden rounded-xl p-3 items-start gap-2 text-xs font-medium" style="display:none"></div>
+
+    <!-- Step 1: email -->
+    <form id="fp-step1" class="flex flex-col gap-4" novalidate>
+      <p class="text-xs text-on-surface-variant -mt-2">Enter your email address to receive your recovery code.</p>
+      <div>
+        <label class="text-sm font-semibold mb-1 block" for="fp-email">Email <span class="text-error">*</span></label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-[20px] pointer-events-none">alternate_email</span>
+        <input id="fp-email" class="inp" type="email" autocomplete="email" placeholder="e.g. j.smith@university.edu"/></div>
+        <p id="fp-email-err" class="err hidden"><span class="ms text-[16px]">error</span><span>Please enter a valid email address.</span></p>
+      </div>
+      <button id="fp-send" type="submit" class="w-full py-3.5 rounded-xl bg-primary-container hover:bg-primary text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition active:scale-[.99]">
+        <span id="fp-send-spin" class="ms text-lg animate-spin hidden">progress_activity</span><span class="ms text-[20px]">forward_to_inbox</span><span id="fp-send-text">Send Recovery Code</span></button>
+    </form>
+
+    <!-- Step 2: code -->
+    <div id="fp-step2" class="hidden flex flex-col gap-4">
+      <div class="flex items-start gap-3 rounded-xl bg-surface-container-low p-3">
+        <div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0"><span class="ms text-[18px]">mark_email_read</span></div>
+        <p class="text-xs text-on-surface-variant leading-relaxed">If an account exists for <b id="fp-sent-to" class="text-on-surface break-all"></b>, a 6-digit code is on its way.</p>
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-2"><span class="text-sm font-semibold">Enter the 6-digit code</span>
+          <button id="fp-resend" type="button" class="text-xs font-semibold text-secondary hover:text-primary disabled:opacity-60 disabled:hover:text-secondary">Resend code</button></div>
+        <div class="flex justify-between gap-1.5" id="fp-otp">
+          <input class="otp" inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1"/>
+          <input class="otp" inputmode="numeric" maxlength="1" aria-label="Digit 2"/>
+          <input class="otp" inputmode="numeric" maxlength="1" aria-label="Digit 3"/>
+          <input class="otp" inputmode="numeric" maxlength="1" aria-label="Digit 4"/>
+          <input class="otp" inputmode="numeric" maxlength="1" aria-label="Digit 5"/>
+          <input class="otp" inputmode="numeric" maxlength="1" aria-label="Digit 6"/>
+        </div>
+        <p id="fp-code-err" class="err hidden"><span class="ms text-[16px]">error</span><span>Please enter all 6 digits.</span></p>
+      </div>
+      <button id="fp-verify" type="button" class="w-full py-3.5 rounded-xl bg-primary-container hover:bg-primary text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition active:scale-[.99]">
+        <span id="fp-verify-spin" class="ms text-lg animate-spin hidden">progress_activity</span><span id="fp-verify-text">Verify Code</span></button>
+      <button id="fp-change" type="button" class="text-xs font-semibold text-secondary hover:text-primary self-center">Use a different email</button>
+    </div>
+
+    <!-- Step 3: new password -->
+    <form id="fp-step3" class="hidden flex flex-col gap-4" novalidate>
+      <p class="text-xs text-on-surface-variant -mt-2">Code verified. Choose a new password for your account.</p>
+      <div>
+        <label class="text-sm font-semibold mb-1 block" for="fp-new">New Password <span class="text-error">*</span></label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-[20px] pointer-events-none">lock</span>
+        <input id="fp-new" class="inp pr-11" type="password" autocomplete="new-password" placeholder="Create a strong password"/>
+        <button type="button" data-toggle="fp-new" aria-label="Toggle password visibility" class="absolute right-2 p-1 text-outline hover:text-on-surface"><span class="ms text-[20px]">visibility</span></button></div>
+        <div class="flex flex-wrap gap-1.5 mt-1.5">
+          <span class="pill" id="fp-pill-len"><span class="ms text-[14px]">check_circle</span>8+ characters</span>
+          <span class="pill" id="fp-pill-num"><span class="ms text-[14px]">check_circle</span>1 number or symbol</span>
+        </div>
+        <p id="fp-new-err" class="err hidden"><span class="ms text-[16px]">error</span><span>Password must meet the required criteria.</span></p>
+      </div>
+      <div>
+        <label class="text-sm font-semibold mb-1 block" for="fp-conf">Confirm New Password <span class="text-error">*</span></label>
+        <div class="relative flex items-center"><span class="ms absolute left-3 text-outline text-[20px] pointer-events-none">lock_reset</span>
+        <input id="fp-conf" class="inp pr-11" type="password" autocomplete="new-password" placeholder="Re-enter your new password"/>
+        <button type="button" data-toggle="fp-conf" aria-label="Toggle confirm password visibility" class="absolute right-2 p-1 text-outline hover:text-on-surface"><span class="ms text-[20px]">visibility</span></button></div>
+        <p id="fp-conf-err" class="err hidden"><span class="ms text-[16px]">error</span><span>Passwords do not match.</span></p>
+      </div>
+      <button id="fp-update" type="submit" class="w-full py-3.5 rounded-xl bg-primary-container hover:bg-primary text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-sm transition active:scale-[.99]">
+        <span id="fp-update-spin" class="ms text-lg animate-spin hidden">progress_activity</span><span id="fp-update-text">Update Password</span></button>
+    </form>
+
+    <div class="pt-1 text-center">
+      <button type="button" data-go="signin" class="inline-flex items-center gap-1 text-xs text-on-surface-variant hover:text-primary"><span class="ms text-[16px]">arrow_back</span>Remembered your password? <span class="font-semibold text-primary underline">Back to Sign In</span></button>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="app-root" class="hidden">
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(62,39,35,0.06)]"><div class="h-20 max-w-7xl mx-auto px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[22px]">location_searching</span></div><div class="flex flex-col"><div class="flex items-center gap-1.5"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">CampusFind</span><span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">SECURE</span></div><span class="font-label-sm text-label-sm text-secondary font-medium tracking-wide uppercase">Lost &amp; Found Central</span></div></div><nav class="hidden lg:flex items-center gap-space-sm" data-active-classes="bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg"><a aria-current="page" class="px-3.5 py-2 transition-colors bg-primary-container text-on-primary rounded-lg font-label-lg text-label-lg" data-path="home" href="#">Home</a><a class="px-3.5 py-2 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="browse-items" href="#">Browse Items</a><a class="px-3.5 py-2 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="report-an-item" href="#">Report an Item</a><a class="px-3.5 py-2 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="how-it-works" href="#">How It Works</a><a class="px-3.5 py-2 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="about-us" href="#">About Us</a></nav><div class="flex items-center gap-space-sm sm:gap-space-md"><button id="mobile-menu-btn" type="button" aria-label="Open menu" class="lg:hidden w-9 h-9 rounded-xl bg-surface-container-low hover:bg-surface-container text-primary flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">menu</span></button><a class="hidden sm:inline-flex items-center gap-space-xs px-4 py-2.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container hover:text-on-primary transition-all shadow-[0_2px_6px_-1px_rgba(62,39,35,0.15)]" data-path="report-an-item" href="#"><span class="material-symbols-outlined text-[18px]">add_circle</span><span>Report an Item</span></a><div class="flex items-center gap-space-sm pl-space-sm"><div class="hidden xl:flex flex-col text-right"><span id="hdr-name" class="font-label-md text-label-md text-on-surface font-semibold">Student</span><span id="hdr-sub" class="font-label-sm text-label-sm text-secondary"></span></div><div class="relative">
+  <button id="user-menu-btn" type="button" aria-label="Account menu" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-primary-container transition-colors"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></button>
+  <div id="user-menu" class="hidden absolute right-0 top-12 w-64 bg-surface-container-lowest rounded-2xl shadow-xl p-3 z-[60]">
+    <div class="px-2 pb-2 mb-2 border-b border-surface-container-high"><span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block">Signed in as</span><span id="menu-email" class="font-body-md text-body-md text-on-surface break-all"></span></div>
+    <button id="menu-signout-btn" type="button" class="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg transition-colors"><span class="material-symbols-outlined text-[18px]">logout</span>Sign Out</button>
+  </div>
+</div></div></div></div></header>
+<div id="mobile-nav" class="hidden lg:hidden fixed top-20 left-0 right-0 z-40 bg-surface shadow-lg px-margin-mobile py-3">
+  <div class="max-w-7xl mx-auto flex flex-col gap-1">
+    <a data-path="home" href="#" class="px-3 py-3 rounded-lg font-label-lg text-label-lg text-primary hover:bg-surface-container-high">Home</a>
+    <a data-path="browse-items" href="#" class="px-3 py-3 rounded-lg font-label-lg text-label-lg text-primary hover:bg-surface-container-high">Browse Items</a>
+    <a data-path="report-an-item" href="#" class="px-3 py-3 rounded-lg font-label-lg text-label-lg text-primary hover:bg-surface-container-high">Report an Item</a>
+    <a data-path="how-it-works" href="#" class="px-3 py-3 rounded-lg font-label-lg text-label-lg text-primary hover:bg-surface-container-high">How It Works</a>
+    <a data-path="about-us" href="#" class="px-3 py-3 rounded-lg font-label-lg text-label-lg text-primary hover:bg-surface-container-high">About Us</a>
+  </div>
+</div>
+<main class="w-full pt-20 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Toast Notification Container -->
+<div class="fixed bottom-6 right-6 z-[100] flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
+<!-- Item Detail Modal Container -->
+<div class="fixed inset-0 z-[90] hidden bg-primary/60 backdrop-blur-sm flex items-center justify-center p-4" id="item-modal">
+<div class="bg-surface-container-lowest max-w-2xl w-full rounded-2xl shadow-2xl overflow-hidden transform transition-all max-h-[921px] flex flex-col" id="modal-content">
+<!-- Modal Header -->
+<div class="p-6 bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center material-symbols-outlined text-xl" id="modal-category-icon">category</span>
+<div>
+<div class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-label-sm" id="modal-status-badge"></div>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight mt-1" id="modal-title"></h3>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface hover:bg-surface-container-highest text-on-surface-variant flex items-center justify-center transition-colors" id="modal-close-btn">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Modal Body (Scrollable) -->
+<div class="p-6 overflow-y-auto space-y-5">
+<div class="w-full h-56 rounded-xl overflow-hidden relative bg-gradient-to-br from-surface-container to-secondary-fixed/50 flex items-center justify-center">
+<span id="modal-big-icon" class="material-symbols-outlined text-primary/25 text-[120px]">category</span>
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-md px-3 py-1 rounded-lg text-primary font-label-md text-label-md flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-sm">qr_code_scanner</span>
+<span id="modal-reference-id">CF-9482</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-3.5 rounded-xl bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block">Logged Location</span>
+<div class="flex items-center gap-2 mt-1 text-on-surface font-title-lg text-title-lg">
+<span class="material-symbols-outlined text-primary text-xl">location_on</span>
+<span class="font-semibold text-sm" id="modal-location"></span>
+</div>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block">Report Date</span>
+<div class="flex items-center gap-2 mt-1 text-on-surface font-title-lg text-title-lg">
+<span class="material-symbols-outlined text-primary text-xl">calendar_today</span>
+<span class="font-semibold text-sm" id="modal-date"></span>
+</div>
+</div>
+</div>
+<div>
+<span class="font-label-md text-label-md text-secondary block mb-1">Item Description &amp; Distinctive Marks</span>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed" id="modal-desc"></p>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md"><span class="material-symbols-outlined text-primary text-lg">person</span><span>Reported by <b id="modal-reporter" class="text-on-surface"></b></span></div>
+<!-- Safe Custodian Protocol Guidance -->
+<div class="p-4 rounded-xl bg-surface-container flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-2xl mt-0.5">verified_user</span>
+<div class="space-y-1">
+<div class="font-label-lg text-label-lg text-primary">University Safe Exchange Protocol</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Claims must be verified in person at the building information desk. Please bring your active Student ID Card or provide serial numbers/screen lock codes for proof of ownership.</p>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-5 bg-surface-container-low flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-xl bg-secondary-container text-on-secondary-container font-label-md text-label-md hover:bg-secondary-fixed transition-colors flex items-center gap-1.5" id="modal-mark-status-btn">
+<span class="material-symbols-outlined text-sm">task_alt</span>
+<span id="modal-status-action-text">Mark as Recovered</span>
+</button>
+<button class="px-4 py-2 rounded-xl bg-error-container text-on-error-container font-label-md text-label-md hover:opacity-90 transition-colors flex items-center gap-1.5" id="modal-delete-btn"><span class="material-symbols-outlined text-sm">delete</span><span>Delete</span></button>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-5 py-2.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container transition-all flex items-center gap-2 shadow-sm" id="modal-contact-desk-btn">
+<span class="material-symbols-outlined text-base">support_agent</span>
+<span>Contact Reporter</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- HERO SECTION -->
+<section class="relative px-margin py-space-xl overflow-hidden bg-gradient-to-b from-surface-container-low/60 to-surface">
+<!-- Subtle collegiate ornamental arches -->
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary-fixed/20 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 bottom-0 w-80 h-80 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center relative z-10">
+<!-- Left Column -->
+<div class="lg:col-span-7 space-y-space-md">
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-fixed/50 text-on-secondary-fixed font-label-sm text-label-sm tracking-wide uppercase">
+<span class="material-symbols-outlined text-sm text-secondary">verified</span>
+<span>YOUR CAMPUS LOST &amp; FOUND PLATFORM</span>
+</div>
+<!-- Main Headline -->
+<h1 class="font-display text-display lg:text-[54px] lg:leading-[62px] text-primary tracking-tight font-bold">
+          Lost Something? Let's Help You <span class="text-tertiary-container underline decoration-secondary-container decoration-4 underline-offset-8">Find It.</span>
+</h1>
+<!-- Supporting Description -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">
+          From misplaced phones and student IDs to dorm keys, backpacks, and academic gear, CampusFind unites your campus registry to bring misplaced belongings safely home.
+        </p>
+<!-- CTA Buttons -->
+<div class="flex flex-wrap items-center gap-space-sm pt-2">
+<a class="px-6 py-3.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container hover:shadow-lg transition-all flex items-center gap-2 shadow-sm" href="#" data-scroll="search-section">
+<span class="material-symbols-outlined text-lg">search</span>
+<span>Find an Item</span>
+</a>
+<button class="px-6 py-3.5 rounded-xl bg-surface-container-lowest text-primary font-label-lg text-label-lg hover:bg-surface-container-high transition-all flex items-center gap-2 shadow-sm" id="hero-quick-report-btn">
+<span class="material-symbols-outlined text-lg">add_circle_outline</span>
+<span>Report Lost or Found</span>
+</button>
+</div>
+<!-- Trust statement & Micro metrics -->
+<div class="pt-4 flex items-center gap-4 text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-base">domain_verification</span>
+<span class="font-medium">Direct Custodian Custody</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-base">lock</span>
+<span class="font-medium">Verified Student Credentials</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Illustrated Collegiate Container -->
+<div class="lg:col-span-5 relative">
+<div class="relative rounded-3xl bg-surface-container-lowest p-4 shadow-xl overflow-hidden">
+<!-- Warm Framing Accent -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/5 via-secondary/5 to-transparent pointer-events-none"></div>
+<div class="rounded-2xl overflow-hidden relative h-80 sm:h-96 w-full">
+<img class="w-full h-full object-cover" data-alt="Minimalist collegiate illustration showing university students helping each other recover lost items on an ivy-covered brick campus quad, warm sepia and muted gold tones, flat graphic design style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQk2i9fCaHpLCTS12e9wxCP8J_5JNZQ26HZZTurupRODqpjgKvSMFxQtZtXE-nBiBWO43b0PHAb6oM3CAfxLxnR_XU80mcY2c8c0bxeHrLI-UXRui2FTeDLEJw8FJZl8SnTy-l0Zl3wted0yNjwRh-GPuzFUZNRi_bQx74RISpyMEFCx6t5xYH-B1qGUtvzm9_GSB9XIkNnbsM4zDXzsoiAUq3ulPONVc8CGPllqBPVhZqd-dyWJxz"/>
+<!-- Graphic Floating Pill 1: Verified Semester Stat -->
+<div class="absolute top-4 left-4 bg-surface/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-xl">handshake</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-primary block leading-tight font-bold"><span id="hero-recovered">0</span></span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Items Reunited So Far</span>
+</div>
+</div>
+<!-- Graphic Floating Pill 2: Live Activity Ping -->
+<div class="absolute bottom-4 right-4 bg-primary text-on-primary px-3.5 py-2 rounded-xl shadow-lg flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed animate-ping"></span>
+<span class="font-label-sm text-label-sm">Active Drop Desk: Main Library R104</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SEARCH & FILTER PANEL (Overlapping Elevation) -->
+<section class="px-margin -mt-6 relative z-20" id="search-section">
+<div class="max-w-7xl mx-auto bg-surface-container-lowest rounded-3xl shadow-xl p-space-md sm:p-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-space-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">Looking for Something?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Search reported items and narrow down your results across university desks.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-surface-container text-secondary font-semibold" id="active-results-indicator">
+            Showing 8 of 8 items
+          </span>
+</div>
+</div>
+<!-- Controls Form Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-sm pt-2">
+<!-- Search Keyword Input -->
+<div class="md:col-span-5 relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-secondary text-xl">search</span>
+<input class="w-full h-11 pl-11 pr-4 rounded-xl bg-surface text-on-surface placeholder:text-on-surface-variant/60 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container outline-none transition-all font-body-md text-body-md" id="filter-search-input" placeholder="Search for a phone, ID card, bag, keys..." type="text"/>
+</div>
+<!-- Category Dropdown -->
+<div class="md:col-span-3">
+<select class="w-full h-11 px-3.5 rounded-xl bg-surface text-on-surface focus:ring-2 focus:ring-primary-container outline-none font-body-md text-body-md transition-all cursor-pointer" id="filter-category-select">
+<option value="ALL">All Categories</option>
+<option value="Phones &amp; Electronics">Phones &amp; Electronics</option>
+<option value="Student IDs &amp; Cards">Student IDs &amp; Cards</option>
+<option value="Bags &amp; Backpacks">Bags &amp; Backpacks</option>
+<option value="Keys">Keys &amp; Access Fobs</option>
+<option value="Books &amp; Stationery">Books &amp; Stationery</option>
+<option value="Clothing &amp; Accessories">Clothing &amp; Accessories</option>
+<option value="Wallets &amp; Personal Items">Wallets &amp; Personal Items</option>
+<option value="Other Items">Other Items</option>
+</select>
+</div>
+<!-- Location Dropdown -->
+<div class="md:col-span-2">
+<select class="w-full h-11 px-3.5 rounded-xl bg-surface text-on-surface focus:ring-2 focus:ring-primary-container outline-none font-body-md text-body-md transition-all cursor-pointer" id="filter-location-select">
+<option value="ALL">All Locations</option>
+<option value="Main Library">Main Library</option>
+<option value="Student Union">Student Union</option>
+<option value="Science Complex">Science Complex</option>
+<option value="Engineering Hall">Engineering Hall</option>
+<option value="Dining Center">Campus Dining Hall</option>
+<option value="Athletic Center">Athletic Center</option>
+<option value="Central Bus Stop">Central Bus Stop</option>
+</select>
+</div>
+<!-- Action Buttons -->
+<div class="md:col-span-2 flex items-center gap-2">
+<button class="flex-1 h-11 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container transition-all flex items-center justify-center gap-1.5 shadow-sm" id="search-trigger-btn">
+<span class="material-symbols-outlined text-base">tune</span>
+<span>Filter</span>
+</button>
+<button class="h-11 w-11 rounded-xl bg-surface-container text-secondary hover:bg-surface-container-highest transition-colors flex items-center justify-center" id="reset-filters-btn" title="Clear all filters">
+<span class="material-symbols-outlined text-lg">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Quick Status Filter Pills -->
+<div class="mt-4 pt-4 flex flex-wrap items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider mr-2 font-semibold">Filter by Status:</span>
+<button class="status-toggle-btn active-pill px-3.5 py-1.5 rounded-full font-label-md text-label-md bg-primary text-on-primary transition-all" data-status="ALL">All</button>
+<button class="status-toggle-btn px-3.5 py-1.5 rounded-full font-label-md text-label-md bg-surface text-secondary hover:bg-surface-container transition-all" data-status="Lost">Lost</button>
+<button class="status-toggle-btn px-3.5 py-1.5 rounded-full font-label-md text-label-md bg-surface text-secondary hover:bg-surface-container transition-all" data-status="Found">Found</button>
+<button class="status-toggle-btn px-3.5 py-1.5 rounded-full font-label-md text-label-md bg-surface text-secondary hover:bg-surface-container transition-all" data-status="Recovered">Recovered</button>
+</div>
+</div>
+</section>
+<!-- BROWSE BY CATEGORY SECTION -->
+<section class="px-margin py-space-xl max-w-7xl mx-auto w-full">
+<div class="mb-space-lg">
+<div class="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+<span>Campus Registry Catalog</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight mt-1">Browse by Category</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Explore the types of belongings reported by university students and staff.</p>
+</div>
+<!-- 8 Category Bento Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="category-cards-grid">
+<!-- 1. Phones & Electronics -->
+<div class="category-card cursor-pointer group bg-surface-container-lowest hover:bg-surface-container p-5 rounded-2xl transition-all shadow-sm hover:shadow-md flex flex-col justify-between h-40" data-cat="Phones &amp; Electronics">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">smartphone</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-secondary">2 items</span>
+</div>
+<div>
+<span class="font-title-lg text-title-lg text-primary font-semibold block group-hover:text-tertiary-container transition-colors">Phones &amp; Tech</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Laptops, earbuds, chargers</span>
+</div>
+</div>
+<!-- 2. Student IDs & Cards -->
+<div class="category-card cursor-pointer group bg-surface-container-lowest hover:bg-surface-container p-5 rounded-2xl transition-all shadow-sm hover:shadow-md flex flex-col justify-between h-40" data-cat="Student IDs &amp; Cards">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">badge</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-secondary">1 item</span>
+</div>
+<div>
+<span class="font-title-lg text-title-lg text-primary font-semibold block group-hover:text-tertiary-container transition-colors">Student IDs</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dorm access, library badges</span>
+</div>
+</div>
+<!-- 3. Bags & Backpacks -->
+<div class="category-card cursor-pointer group bg-surface-container-lowest hover:bg-surface-container p-5 rounded-2xl transition-all shadow-sm hover:shadow-md flex flex-col justify-between h-40" data-cat="Bags &amp; Backpacks">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">backpack</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-secondary">1 item</span>
+</div>
+<div>
+<span class="font-title-lg text-title-lg text-primary font-semibold block group-hover:text-tertiary-container transition-colors">Bags &amp; Packs</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Totes, satchels, athletic bags</span>
+</div>
+</div>
+<!-- 4. Keys -->
+<div class="category-card cursor-pointer group bg-surface-container-lowest hover:bg-surface-container p-5 rounded-2xl transition-all shadow-sm hover:shadow-md flex flex-col justify-between h-40" data-cat="Keys">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">key</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-secondary">1 item</span>
+</div>
+<div>
+<span class="font-title-lg text-title-lg text-primary font-semibold block group-hover:text-tertiary-container transition-colors">Keys &amp; Fobs</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dorm keys, car fobs, locks</span>
+</div>
+</div>
+<!-- 5. Books & Stationery -->
+<div class="category-card cursor-pointer group bg-surface-container-lowest hover:bg-surface-container p-5 rounded-2xl transition-all shadow-sm hover:shadow-md flex flex-col justify-between h-40" data-cat="Books &amp; Stationery">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">menu_book</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-secondary">1 item</span>
+</div>
+<div>
+<span class="font-title-lg text-title-lg text-primary font-semibold block group-hover:text-tertiary-container transition-colors">Books &amp; Text</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Textbooks, planners, notes</span>
+</div>
+</div>
+<!-- 6. Clothing & Accessories -->
+<div class="category-card cursor-pointer group bg-surface-container-lowest hover:bg-surface-container p-5 rounded-2xl transition-all shadow-sm hover:shadow-md flex flex-col justify-between h-40" data-cat="Clothing &amp; Accessories">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">apparel</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-secondary">1 item</span>
+</div>
+<div>
+<span class="font-title-lg text-title-lg text-primary font-semibold block group-hover:text-tertiary-container transition-colors">Clothing &amp; Gear</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Jackets, scarves, bottles</span>
+</div>
+</div>
+<!-- 7. Wallets & Personal Items -->
+<div class="category-card cursor-pointer group bg-surface-container-lowest hover:bg-surface-container p-5 rounded-2xl transition-all shadow-sm hover:shadow-md flex flex-col justify-between h-40" data-cat="Wallets &amp; Personal Items">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-secondary">1 item</span>
+</div>
+<div>
+<span class="font-title-lg text-title-lg text-primary font-semibold block group-hover:text-tertiary-container transition-colors">Wallets &amp; Cash</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Purses, cardholders, watches</span>
+</div>
+</div>
+<!-- 8. Other Items -->
+<div class="category-card cursor-pointer group bg-surface-container-lowest hover:bg-surface-container p-5 rounded-2xl transition-all shadow-sm hover:shadow-md flex flex-col justify-between h-40" data-cat="Other Items">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">category</span>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-secondary">General</span>
+</div>
+<div>
+<span class="font-title-lg text-title-lg text-primary font-semibold block group-hover:text-tertiary-container transition-colors">Other Items</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Glasses, umbrellas, miscellaneous</span>
+</div>
+</div>
+</div>
+</section>
+<!-- RECENTLY REPORTED ITEMS SECTION -->
+<section class="px-margin py-space-xl bg-surface-container-low/40 w-full" id="recent-items-section">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-space-lg">
+<div>
+<div class="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Real-Time Campus Feed</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight mt-1">Recently Reported Items</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Explore the latest lost and found reports from your campus community.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-3.5 py-2 rounded-xl bg-surface-container-lowest text-secondary hover:bg-surface-container transition-colors font-label-sm text-label-sm flex items-center gap-1.5 shadow-sm" id="reset-feed-data-btn">
+<span class="material-symbols-outlined text-sm">refresh</span>
+<span>Refresh</span>
+</button>
+</div>
+</div>
+<!-- Items Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="items-grid-container">
+<!-- Rendered dynamically by JavaScript -->
+</div>
+<!-- Empty State View -->
+<div class="hidden py-16 px-6 text-center bg-surface-container-lowest rounded-3xl shadow-sm my-6" id="empty-state-container">
+<div class="w-16 h-16 rounded-2xl bg-surface-container mx-auto flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined text-3xl">search_off</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">No Matching Items Found</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto mb-6">We couldn't find any active reports matching your filters. Try adjusting keywords or clearing the category filter.</p>
+<button class="px-5 py-2.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container transition-colors" id="empty-reset-btn">
+          Reset All Filters
+        </button>
+</div>
+<!-- Section Footer -->
+<div class="mt-space-lg flex justify-center">
+<button class="px-7 py-3 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-primary font-label-lg text-label-lg shadow-sm hover:shadow transition-all flex items-center gap-2" id="view-all-items-trigger">
+<span>View All Reports</span>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- HOW IT WORKS SECTION -->
+<section id="how-it-works" class="px-margin py-space-xl max-w-7xl mx-auto w-full">
+<div class="text-center max-w-2xl mx-auto mb-space-xl">
+<div class="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">cycle</span>
+<span>Straightforward Custodian Workflow</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight mt-1">Recover Your Belongings in Three Simple Steps</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">CampusFind streamlines reporting and verification so items are returned safely without bureaucratic hassle.</p>
+</div>
+<!-- 3 Step Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+<!-- Step 1 -->
+<div class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-headline-lg text-headline-lg text-secondary-fixed-dim font-bold">01</span>
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Search or Report</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Search existing university drop logs to see whether someone turned in your item. If not, log a lost report in seconds.
+          </p>
+</div>
+<div class="mt-6 pt-4 text-secondary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Takes under 2 minutes</span>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-headline-lg text-headline-lg text-secondary-fixed-dim font-bold">02</span>
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">forum</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Connect</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Review matching records and coordinate with authorized building custodians or student desk liaisons with verified safety protocols.
+          </p>
+</div>
+<div class="mt-6 pt-4 text-secondary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Official campus drop points</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-headline-lg text-headline-lg text-secondary-fixed-dim font-bold">03</span>
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">check_circle</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Recover</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Present identity verification at the designated campus office, collect your item, and mark the report resolved in the community ledger.
+          </p>
+</div>
+<div class="mt-6 pt-4 text-secondary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">task_alt</span>
+<span>Archived &amp; safely returned</span>
+</div>
+</div>
+</div>
+</section>
+<!-- COMMUNITY IMPACT METRICS SECTION -->
+<section class="px-margin py-space-xl bg-surface-container-low/60 w-full">
+<div class="max-w-7xl mx-auto">
+<div class="max-w-2xl mb-space-lg">
+<div class="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">monitoring</span>
+<span>Community Metrics</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight mt-1">Small Actions. Meaningful Recoveries.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+          Every report helps build a more supportive campus community. By logging accurate details, students restore belonging and peace of mind across collegiate grounds.
+        </p>
+</div>
+<!-- 4 Dynamic Stat Cards -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Metric 1: Total Reports -->
+<div class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider">Total Reports</span>
+<span class="material-symbols-outlined text-secondary text-xl">folder_shared</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-primary font-bold" id="stat-total-reports">8</span>
+<span class="font-label-sm text-label-sm text-secondary">Logged</span>
+</div>
+<div class="mt-3 text-secondary font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">insights</span>
+<span>Real-time dataset</span>
+</div>
+</div>
+<!-- Metric 2: Lost Items -->
+<div class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider">Lost Items</span>
+<span class="material-symbols-outlined text-error text-xl">search</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-primary font-bold" id="stat-lost-items">4</span>
+<span class="font-label-sm text-label-sm text-error">Pending</span>
+</div>
+<div class="mt-3 text-secondary font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Seeking recovery</span>
+</div>
+</div>
+<!-- Metric 3: Found Items -->
+<div class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider">Found Items</span>
+<span class="material-symbols-outlined text-primary text-xl">store</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-primary font-bold" id="stat-found-items">4</span>
+<span class="font-label-sm text-label-sm text-secondary">In Custody</span>
+</div>
+<div class="mt-3 text-secondary font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">pin_drop</span>
+<span>Held at desks</span>
+</div>
+</div>
+<!-- Metric 4: Recovered Items -->
+<div class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md text-secondary font-semibold uppercase tracking-wider">Recovered</span>
+<span class="material-symbols-outlined text-primary text-xl">celebration</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-display text-primary font-bold" id="stat-recovered-items">0</span>
+<span class="font-label-sm text-label-sm text-secondary">Returned</span>
+</div>
+<div class="mt-3 text-secondary font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">done_all</span>
+<span>Restored to owners</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-secondary font-label-sm text-label-sm justify-end">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span>Calculated from active campus reports</span>
+</div>
+</div>
+</section>
+<!-- FINAL CALL-TO-ACTION SECTION -->
+<section class="px-margin py-space-xl bg-gradient-to-r from-primary to-primary-container text-on-primary w-full relative overflow-hidden">
+<!-- Atmospheric university geometry -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-secondary-fixed/10 pointer-events-none"></div>
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-lg relative z-10">
+<div class="space-y-2 max-w-xl">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed/20 text-secondary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm">volunteer_activism</span>
+<span>Community Stewardship</span>
+</div>
+<h2 class="font-display text-headline-lg lg:text-display text-on-primary tracking-tight font-bold">
+          Found Something? Help It Find Its Owner.
+        </h2>
+<p class="font-body-lg text-body-lg text-on-primary-container leading-relaxed">
+          A simple report could make someone's day a whole lot easier. Drop items off at any library or campus union desk.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+<button class="px-6 py-3.5 rounded-xl bg-surface-container-lowest text-primary font-label-lg text-label-lg hover:bg-surface-container-high transition-all shadow-md flex items-center gap-2" id="cta-report-found-btn">
+<span class="material-symbols-outlined text-lg">add_location_alt</span>
+<span>Report a Found Item</span>
+</button>
+<a class="px-6 py-3.5 rounded-xl bg-transparent text-secondary-fixed font-label-lg text-label-lg hover:bg-on-primary/10 transition-colors flex items-center gap-2" href="#" data-scroll="search-section">
+<span class="material-symbols-outlined text-lg">list_alt</span>
+<span>Browse Reports</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+<!-- CLIENT APPLICATION JAVASCRIPT -->
+</main>
+<footer class="w-full bg-primary text-on-primary"><div class="max-w-7xl mx-auto px-margin pt-space-xl pb-space-lg"><div class="grid grid-cols-1 md:grid-cols-4 gap-space-xl pb-space-lg"><div class="space-y-space-md md:col-span-1"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-[20px]">location_searching</span></div><span class="font-headline-sm text-headline-sm text-on-primary tracking-tight">CampusFind</span></div><p class="font-body-md text-body-md text-on-primary-container max-w-sm">University-wide lost property and custodian registry. Uniting campus communities and restoring belongings with verified security protocols.</p><div class="flex items-center gap-space-xs"><span class="px-2 py-1 rounded bg-primary-container text-on-primary-container font-label-sm text-label-sm">HQ: Main Library Room 104</span></div></div><div class="space-y-space-sm"><div class="font-title-lg text-title-lg text-secondary-fixed font-semibold">Explore Archive</div><ul class="space-y-space-xs font-body-md text-body-md"><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">arrow_right_alt</span><a class="text-on-primary-container hover:text-on-primary transition-colors" data-path="browse-items" href="#">Recent Recoveries</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">arrow_right_alt</span><a class="text-on-primary-container hover:text-on-primary transition-colors" data-path="browse-items" href="#">Building Drop Points</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">arrow_right_alt</span><a class="text-on-primary-container hover:text-on-primary transition-colors" data-path="browse-items" href="#">Electronics Ledger</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">arrow_right_alt</span><a class="text-on-primary-container hover:text-on-primary transition-colors" data-path="browse-items" href="#">Student ID Returns</a></li></ul></div><div class="space-y-space-sm"><div class="font-title-lg text-title-lg text-secondary-fixed font-semibold">Campus Verification</div><ul class="space-y-space-xs font-body-md text-body-md"><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">arrow_right_alt</span><a class="text-on-primary-container hover:text-on-primary transition-colors" data-path="how-it-works" href="#">Filing a Claim</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">arrow_right_alt</span><a class="text-on-primary-container hover:text-on-primary transition-colors" data-path="how-it-works" href="#">Proof of Ownership Guide</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">arrow_right_alt</span><a class="text-on-primary-container hover:text-on-primary transition-colors" data-path="how-it-works" href="#">Custodian Office Hours</a></li><li class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">arrow_right_alt</span><a class="text-on-primary-container hover:text-on-primary transition-colors" data-path="how-it-works" href="#">Security Protocols</a></li></ul></div><div class="space-y-space-sm"><div class="font-title-lg text-title-lg text-secondary-fixed font-semibold">Student Operations</div><p class="font-body-md text-body-md text-on-primary-container">Need emergency assistance for missing residence hall keys or academic tech?</p><div class="flex items-center gap-space-xs text-secondary-fixed font-label-lg text-label-lg"><span class="material-symbols-outlined text-[18px]">call</span><a href="tel:5552345678" class="hover:underline">(555) 234-LOST</a></div><div class="flex items-center gap-space-xs text-secondary-fixed font-label-lg text-label-lg"><span class="material-symbols-outlined text-[18px]">mail</span><a href="mailto:lostfound@university.edu" class="hover:underline">lostfound@university.edu</a></div></div></div><div class="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-md text-on-primary-container font-label-md text-label-md"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px]">shield</span><span>© 2025 University CampusFind Division. Institutional Property Management. All rights reserved.</span></div><div class="flex items-center gap-space-lg"><a class="hover:text-on-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a><a class="hover:text-on-primary transition-colors" data-path="terms-of-service" href="#">Terms of Service</a><a class="hover:text-on-primary transition-colors" data-path="about-us" href="#">Campus Security</a></div></div></div></footer>
+
+<!-- ============ REPORT MODAL ============ -->
+<div id="report-modal" class="hidden fixed inset-0 z-[95] bg-primary/60 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-surface-container-lowest max-w-lg w-full rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+    <div class="p-5 bg-surface-container flex items-center justify-between">
+      <div><h3 class="font-headline-sm text-headline-sm text-primary tracking-tight">Report an Item</h3><p class="font-body-sm text-body-sm text-on-surface-variant">Tell the campus what you lost or found.</p></div>
+      <button id="rp-close" type="button" aria-label="Close" class="w-9 h-9 rounded-full bg-surface hover:bg-surface-container-highest text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-lg">close</span></button>
+    </div>
+    <form id="rp-form" class="p-5 overflow-y-auto flex flex-col gap-4" novalidate>
+      <div class="grid grid-cols-2 gap-2">
+        <button id="rp-kind-lost" type="button" aria-pressed="true" class="h-11 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-1.5 transition-colors"><span class="material-symbols-outlined text-lg">search</span>I lost something</button>
+        <button id="rp-kind-found" type="button" aria-pressed="false" class="h-11 rounded-xl bg-surface-container-low text-primary font-label-lg text-label-lg flex items-center justify-center gap-1.5 transition-colors"><span class="material-symbols-outlined text-lg">pan_tool</span>I found something</button>
+      </div>
+      <div>
+        <label id="rp-title-label" for="rp-title" class="font-label-lg text-label-lg text-on-surface block mb-1">What did you lose?</label>
+        <input id="rp-title" maxlength="120" class="w-full h-11 px-3.5 rounded-xl bg-surface-container-low text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container font-body-md text-body-md" placeholder="e.g. Black backpack, Samsung phone, Student ID"/>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div><label for="rp-category" class="font-label-lg text-label-lg text-on-surface block mb-1">Category</label>
+          <select id="rp-category" class="w-full h-11 px-3 rounded-xl bg-surface-container-low text-on-surface outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md"></select></div>
+        <div><label id="rp-date-label" for="rp-date" class="font-label-lg text-label-lg text-on-surface block mb-1">Date lost</label>
+          <input id="rp-date" type="date" class="w-full h-11 px-3 rounded-xl bg-surface-container-low text-on-surface outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md"/></div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div><label id="rp-loc-label" for="rp-building" class="font-label-lg text-label-lg text-on-surface block mb-1">Where did you lose it?</label>
+          <select id="rp-building" class="w-full h-11 px-3 rounded-xl bg-surface-container-low text-on-surface outline-none focus:ring-2 focus:ring-primary-container font-body-md text-body-md"></select></div>
+        <div><label for="rp-spot" class="font-label-lg text-label-lg text-on-surface block mb-1">Exact spot <span class="text-on-surface-variant font-normal">(optional)</span></label>
+          <input id="rp-spot" maxlength="120" class="w-full h-11 px-3.5 rounded-xl bg-surface-container-low text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container font-body-md text-body-md" placeholder="e.g. 3rd floor, Room 204"/></div>
+      </div>
+      <div>
+        <label for="rp-desc" class="font-label-lg text-label-lg text-on-surface block mb-1">Description</label>
+        <textarea id="rp-desc" rows="3" maxlength="1000" class="w-full px-3.5 py-3 rounded-xl bg-surface-container-low text-on-surface outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container font-body-md text-body-md resize-none" placeholder="Colour, brand, stickers, distinctive marks... (don't include secret details like passwords)"></textarea>
+      </div>
+      <p id="rp-err" class="err hidden"><span class="ms text-[16px]">error</span><span></span></p>
+      <div class="flex gap-2">
+        <button id="rp-cancel" type="button" class="flex-1 h-11 rounded-xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg transition-colors">Cancel</button>
+        <button id="rp-submit" type="submit" class="flex-[2] h-11 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-sm transition-colors"><span id="rp-spin" class="ms text-lg animate-spin hidden">progress_activity</span><span id="rp-text">Submit Report</span></button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div id="modal" class="hidden fixed inset-0 z-[120] flex items-center justify-center p-4" style="background:#2a313d99">
+  <div class="bg-white rounded-xl p-6 max-w-sm w-full shadow-xl max-h-[85vh] overflow-y-auto" id="modal-box"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const show=(el,on=true)=>el.classList.toggle('hidden',!on);
+const emailRx=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/* ---- storage (demo only; wrapped for safety) ---- */
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}
+};
+/* ---- Supabase (the anon key is public by design; the student ID allowlist is enforced by a database trigger) ---- */
+const SUPABASE_URL='https://bqppxyllwpmhrqfynuha.supabase.co';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJxcHB4eWxsd3BtaHJxZnludWhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MDY2MjAsImV4cCI6MjEwNzI4MjYyMH0.b2ZQeeUwr7oEYLBZa7_XXugc4yzhYP_tB3eitV9xnAo';
+const hashParams=new URLSearchParams(location.hash.replace(/^#/,''));
+let sb=null;
+try{sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true}});}catch(e){}
+const normId=v=>String(v||'').replace(/\s+/g,'').toUpperCase();
+const SID_RX=/^[A-Z]{2}\d{3}\/\d{4}\/\d{4}$/;
+const redirectUrl=/^https?:/.test(location.protocol)?location.href.split('#')[0].split('?')[0]:undefined;
+const NET_ERR='Could not reach the server. Check your internet connection and try again.';
+
+/* ---- view switching ---- */
+function go(view){
+  ['signin','signup','forgot'].forEach(v=>show($('view-'+v),v===view));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+
+/* ---- password visibility ---- */
+document.querySelectorAll('[data-toggle]').forEach(b=>b.addEventListener('click',()=>{
+  const i=$(b.dataset.toggle),p=i.type==='password';
+  i.type=p?'text':'password';b.querySelector('span').textContent=p?'visibility_off':'visibility';
+}));
+
+/* ---- modal helpers ---- */
+function openModal(html){$('modal-box').innerHTML=html;show($('modal'));}
+function closeModal(){show($('modal'),false);$('modal-box').innerHTML='';}
+$('modal').addEventListener('click',e=>{if(e.target===$('modal')&&!$('modal').dataset.lock)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('modal').classList.contains('hidden')&&!$('modal').dataset.lock)closeModal();});
+const icon=(n)=>`<div class="w-14 h-14 rounded-full flex items-center justify-center mb-3 mx-auto" style="background:#fdc39a66"><span class="ms text-primary text-[32px]">${n}</span></div>`;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const btnCls='w-full h-11 bg-primary text-white rounded-lg text-sm font-semibold shadow-sm active:scale-[.98] transition';
+const ghostCls='w-full h-11 mt-2 bg-surface-container-low text-primary rounded-lg text-sm font-semibold hover:bg-surface-container transition';
+
+/* ---- sign-in alert ---- */
+function siAlert(type,msg){
+  const a=$('si-alert');
+  a.style.display='flex';
+  a.className='rounded-xl p-3 mb-4 items-start gap-2 text-xs font-medium '+(type==='error'?'bg-error-container text-on-error-container':'bg-surface-container text-on-secondary-container');
+  a.innerHTML=`<span class="ms text-lg shrink-0">${type==='error'?'error_outline':'check_circle'}</span><div>${esc(msg)}</div>`;
+}
+const siHide=()=>{$('si-alert').style.display='none'};
+
+/* ---- signed-in modal (no home screen) ---- */
+function signedIn(u){
+  const rem=$('si-remember').checked;
+  if(rem&&u.email)store.set('cf_remember',u.email);else store.del('cf_remember');
+  enterApp(u);
+}
+function restoreRemember(){const r=store.get('cf_remember',null);if(r){$('si-email').value=r;$('si-remember').checked=true;}}
+restoreRemember();
+
+/* ---- sign-in validation ---- */
+function vEmail(inp,err){const ok=emailRx.test(inp.value.trim());inp.classList.toggle('bad',!ok);show(err,!ok);return ok;}
+function vPass(){const ok=$('si-pass').value.length>=6;$('si-pass').classList.toggle('bad',!ok);show($('si-pass-err'),!ok);return ok;}
+$('si-email').addEventListener('blur',()=>vEmail($('si-email'),$('si-email-err')));
+$('si-pass').addEventListener('blur',vPass);
+$('si-email').addEventListener('input',()=>{if(!$('si-email-err').classList.contains('hidden'))vEmail($('si-email'),$('si-email-err'))});
+$('si-pass').addEventListener('input',()=>{if(!$('si-pass-err').classList.contains('hidden'))vPass()});
+
+$('si-form').addEventListener('submit',e=>{
+  e.preventDefault();siHide();
+  const a=vEmail($('si-email'),$('si-email-err')),b=vPass();
+  if(!a||!b){siAlert('error','Please resolve the highlighted fields to continue.');return;}
+  const email=$('si-email').value.trim().toLowerCase(),pw=$('si-pass').value;
+  if(!sb){siAlert('error',NET_ERR);return;}
+  $('si-submit').disabled=true;show($('si-spin'));$('si-text').textContent='Authenticating...';
+  (async()=>{
+    let res;
+    try{res=await sb.auth.signInWithPassword({email,password:pw});}catch(err){res={error:{message:'network'}};}
+    $('si-submit').disabled=false;show($('si-spin'),false);$('si-text').textContent='Sign In';
+    if(res.error){
+      const m=(res.error.message||'').toLowerCase();
+      if(m.includes('not confirmed')){
+        siAlert('error','Please confirm your email first. Check your inbox (and spam folder) for the confirmation link.');
+        const rb=document.createElement('button');rb.type='button';rb.className='underline font-semibold mt-1 block';rb.textContent='Resend confirmation email';
+        $('si-alert').lastElementChild.appendChild(rb);
+        rb.onclick=async()=>{rb.disabled=true;
+          const r=await sb.auth.resend({type:'signup',email,options:{emailRedirectTo:redirectUrl}}).catch(()=>({error:{message:'network'}}));
+          siAlert(r.error?'error':'success',r.error?'Could not resend right now. Please wait a minute and try again.':'Confirmation email sent. Check your inbox.');};
+      }
+      else if(m.includes('invalid login'))siAlert('error','Incorrect email or password. Please try again or reset your password.');
+      else siAlert('error',NET_ERR);
+      return;}
+    const u=res.data.user;
+    signedIn(u);
+  })();
+});
+
+/* ---- forgot password button ---- */
+$('forgot-btn').addEventListener('click',()=>{
+  siHide();go('forgot');fpStep(1);
+  $('fp-email').value=$('si-email').value.trim();
+});
+
+/* ---- terms / privacy ---- */
+const docs={
+  terms:{t:'Terms of Use',b:['CampusFind is a community service for reporting and recovering lost or found items on campus.','You agree to provide accurate information, to report only items you genuinely lost or found, and to claim only items that belong to you.','Misuse of the platform, false claims or harassment may lead to account suspension.','Found items may be handed to Campus Public Safety for secure custody until verified owners claim them.']},
+  privacy:{t:'Privacy Policy',b:['We collect your name, email and student ID to verify ownership and contact you about your reports.','Your details are shown to other users only when needed to complete a verified claim.','We do not sell your personal data. You may request deletion of your account at any time.','Data is retained only as long as needed to operate the service and meet campus safety requirements.']}
+};
+function showDoc(key,withAgree){
+  const d=docs[key];
+  openModal(`<h3 class="text-xl font-semibold mb-3">${d.t}</h3>${d.b.map(p=>`<p class="text-sm text-on-surface-variant mb-2">${p}</p>`).join('')}
+  <div class="flex gap-2 mt-4"><button id="d-close" class="${ghostCls} mt-0">Close</button>${withAgree?`<button id="d-agree" class="${btnCls}">I Agree</button>`:''}</div>`);
+  $('d-close').onclick=closeModal;
+  if(withAgree)$('d-agree').onclick=()=>{$('su-terms').checked=true;syncTick();closeModal();};
+}
+document.querySelectorAll('[data-doc]').forEach(b=>b.addEventListener('click',()=>showDoc(b.dataset.doc,true)));
+
+/* ---- sign-up ---- */
+const pw=$('su-pass'),cf=$('su-conf');
+function syncTick(){show($('su-tick'),$('su-terms').checked);if($('su-terms').checked)show($('su-terms-err'),false);}
+$('su-terms').addEventListener('change',syncTick);
+function pwOk(){
+  const l=pw.value.length>=8,n=/[\d!@#$%^&*(),.?":{}|<>_\-+=~`\[\]\\\/;']/.test(pw.value);
+  $('pill-len').classList.toggle('ok',l);$('pill-num').classList.toggle('ok',n);return l&&n;
+}
+function matchChk(){
+  const m=$('su-match');
+  if(!cf.value){m.classList.add('hidden');m.classList.remove('flex');show($('su-conf-err'),false);return false;}
+  m.classList.remove('hidden');m.classList.add('flex');
+  const ok=pw.value===cf.value;
+  m.style.color=ok?'#553722':'#ba1a1a';
+  $('su-match-i').textContent=ok?'check_circle':'cancel';
+  $('su-match-t').textContent=ok?'Passwords match':'Passwords do not match';
+  if(ok)show($('su-conf-err'),false);
+  return ok;
+}
+pw.addEventListener('input',()=>{pwOk();if(cf.value)matchChk();if(pwOk())show($('su-pass-err'),false)});
+cf.addEventListener('input',matchChk);
+$('su-sid').addEventListener('input',()=>{show($('su-sid-err'),false);$('su-sid').classList.remove('bad')});
+$('su-name').addEventListener('input',()=>{if($('su-name').value.trim()){show($('su-name-err'),false);$('su-name').classList.remove('bad')}});
+$('su-email').addEventListener('input',()=>{if(emailRx.test($('su-email').value.trim())){show($('su-email-err'),false);$('su-email').classList.remove('bad')}});
+
+$('su-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  let bad=false;
+  const name=$('su-name').value.trim(),email=$('su-email').value.trim().toLowerCase();
+  if(!name){show($('su-name-err'));$('su-name').classList.add('bad');bad=true;}else show($('su-name-err'),false);
+  if(!emailRx.test(email)){$('su-email-err-t').textContent='Please enter a valid university or personal email.';show($('su-email-err'));$('su-email').classList.add('bad');bad=true;}
+  else show($('su-email-err'),false);
+  const sid=normId($('su-sid').value);
+  if(!sid){$('su-sid-err-t').textContent='Please enter your student ID.';show($('su-sid-err'));$('su-sid').classList.add('bad');bad=true;}
+  else if(!SID_RX.test(sid)){$('su-sid-err-t').textContent='Enter your ID in this format: SC200/0000/2024.';show($('su-sid-err'));$('su-sid').classList.add('bad');bad=true;}
+  else{show($('su-sid-err'),false);$('su-sid').classList.remove('bad');}
+  if(!pwOk()){show($('su-pass-err'));bad=true;}else show($('su-pass-err'),false);
+  if(!cf.value||pw.value!==cf.value){show($('su-conf-err'));bad=true;}else show($('su-conf-err'),false);
+  if(!$('su-terms').checked){show($('su-terms-err'));bad=true;}else show($('su-terms-err'),false);
+  if(bad)return;
+  $('su-text').textContent='Creating Account...';show($('su-spin'));$('su-submit').disabled=true;
+  (async()=>{
+    const fail=(el,msgEl,msg,inp)=>{msgEl.textContent=msg;show(el);if(inp)inp.classList.add('bad');};
+    const reset=()=>{$('su-text').textContent='Create Account';show($('su-spin'),false);$('su-submit').disabled=false;};
+    if(!sb){reset();fail($('su-terms-err'),$('su-terms-err').lastElementChild,NET_ERR);return;}
+    let res;
+    try{res=await sb.auth.signUp({email,password:pw.value,options:{data:{full_name:name,student_id:sid},emailRedirectTo:redirectUrl}});}catch(err){res={error:{message:'network'}};}
+    reset();
+    if(res.error){
+      const m=(res.error.message||'').toLowerCase();
+      if(m.includes('already')&&m.includes('registered'))fail($('su-email-err'),$('su-email-err-t'),'An account with this email already exists. Try signing in.',$('su-email'));
+      else if(m.includes('database error'))fail($('su-sid-err'),$('su-sid-err-t'),'This ID is not authorized to join, or it has already been used.',$('su-sid'));
+      else if(m.includes('rate limit'))fail($('su-terms-err'),$('su-terms-err').lastElementChild,'Too many attempts. Please wait a few minutes and try again.');
+      else if(m.includes('network'))fail($('su-terms-err'),$('su-terms-err').lastElementChild,NET_ERR);
+      else fail($('su-terms-err'),$('su-terms-err').lastElementChild,res.error.message||'Sign up failed. Please try again.');
+      return;}
+    const usr=res.data&&res.data.user;
+    if(usr&&Array.isArray(usr.identities)&&usr.identities.length===0){fail($('su-email-err'),$('su-email-err-t'),'An account with this email already exists. Try signing in.',$('su-email'));return;}
+    const needsConfirm=!(res.data&&res.data.session);
+    if(sb)sb.auth.signOut();
+    openModal(`${icon('task_alt')}<h3 class="text-xl font-semibold text-center">Welcome to CampusFind!</h3>
+    <p class="text-sm text-on-surface-variant text-center mt-1 mb-5">Your account has been created.${needsConfirm?' We sent a confirmation link to <b>'+esc(email)+'</b>. Confirm your email, then sign in.':' You can sign in now.'}</p>
+    <button id="su-done" class="${btnCls}">Continue to Sign In</button>`);
+    $('su-done').onclick=()=>{
+      closeModal();$('su-form').reset();syncTick();$('pill-len').classList.remove('ok');$('pill-num').classList.remove('ok');matchChk();
+      go('signin');$('si-email').value=email;$('si-pass').value='';siAlert('success',needsConfirm?'Account created! Confirm your email, then sign in.':'Account created! Sign in with your new credentials.');
+    };
+  })();
+});
+
+/* ---- forgot password (Supabase email code) ---- */
+let fpEmail='',fpTimer=null;
+const fpDigits=[...document.querySelectorAll('.otp')];
+function fpAlert(type,msg){
+  const a=$('fp-alert');
+  if(!msg){a.style.display='none';return;}
+  a.style.display='flex';
+  a.className='rounded-xl p-3 items-start gap-2 text-xs font-medium '+(type==='error'?'bg-error-container text-on-error-container':'bg-surface-container text-on-secondary-container');
+  a.innerHTML=`<span class="ms text-lg shrink-0">${type==='error'?'error_outline':'check_circle'}</span><div>${esc(msg)}</div>`;
+}
+function fpStep(n){
+  [1,2,3].forEach(i=>show($('fp-step'+i),i===n));
+  $('fp-badge').textContent='Step '+n+' of 3';
+  fpAlert();
+}
+function fpStartTimer(){
+  let t=60;const b=$('fp-resend');b.disabled=true;b.textContent='Resend in 60s';clearInterval(fpTimer);
+  fpTimer=setInterval(()=>{t--;if(t<=0){clearInterval(fpTimer);b.disabled=false;b.textContent='Resend code';}else b.textContent='Resend in '+t+'s';},1000);
+}
+const isRateLimit=er=>er&&(er.status===429||/rate limit|only request this after|too many/i.test(er.message||''));
+
+async function fpSend(isResend){
+  const email=isResend?fpEmail:$('fp-email').value.trim().toLowerCase();
+  if(!emailRx.test(email)){$('fp-email').classList.add('bad');show($('fp-email-err'));return;}
+  $('fp-email').classList.remove('bad');show($('fp-email-err'),false);
+  if(!sb){fpAlert('error',NET_ERR);return;}
+  const btn=isResend?$('fp-resend'):$('fp-send');btn.disabled=true;
+  if(!isResend){show($('fp-send-spin'));$('fp-send-text').textContent='Sending...';}
+  let res;
+  try{res=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirectUrl});}catch(err){res={error:{message:'network'}};}
+  if(!isResend){show($('fp-send-spin'),false);$('fp-send-text').textContent='Send Recovery Code';}
+  if(res.error){
+    btn.disabled=false;
+    fpAlert('error',isRateLimit(res.error)?'Too many requests. Please wait a minute or two and try again.':NET_ERR);
+    return;}
+  fpEmail=email;$('fp-sent-to').textContent=email;
+  fpDigits.forEach(d=>{d.value='';d.classList.remove('bad');});
+  show($('fp-code-err'),false);
+  fpStep(2);
+  if(isResend)fpAlert('success','A new code has been sent.');
+  fpStartTimer();fpDigits[0].focus();
+}
+$('fp-step1').addEventListener('submit',e=>{e.preventDefault();fpSend(false);});
+$('fp-email').addEventListener('input',()=>{$('fp-email').classList.remove('bad');show($('fp-email-err'),false);});
+$('fp-resend').addEventListener('click',()=>fpSend(true));
+$('fp-change').addEventListener('click',()=>{clearInterval(fpTimer);fpStep(1);$('fp-email').value=fpEmail;$('fp-email').focus();});
+
+async function fpVerify(){
+  const code=fpDigits.map(d=>d.value).join('');
+  if(code.length<6){show($('fp-code-err'));fpDigits.forEach(d=>{if(!d.value)d.classList.add('bad')});return;}
+  show($('fp-code-err'),false);
+  if(!sb){fpAlert('error',NET_ERR);return;}
+  $('fp-verify').disabled=true;show($('fp-verify-spin'));$('fp-verify-text').textContent='Verifying...';
+  let res;
+  try{res=await sb.auth.verifyOtp({email:fpEmail,token:code,type:'recovery'});}catch(err){res={error:{message:'network'}};}
+  $('fp-verify').disabled=false;show($('fp-verify-spin'),false);$('fp-verify-text').textContent='Verify Code';
+  if(res.error){
+    fpAlert('error',res.error.message==='network'?NET_ERR:'That code is incorrect or has expired. Check the code, or request a new one.');
+    fpDigits.forEach(d=>d.classList.add('bad'));return;}
+  clearInterval(fpTimer);
+  fpStep(3);$('fp-new').focus();
+}
+$('fp-verify').addEventListener('click',fpVerify);
+fpDigits.forEach((d,i)=>{
+  d.addEventListener('input',()=>{
+    d.value=d.value.replace(/\D/g,'').slice(-1);
+    fpDigits.forEach(x=>x.classList.remove('bad'));show($('fp-code-err'),false);
+    if(d.value&&i<5)fpDigits[i+1].focus();
+  });
+  d.addEventListener('keydown',e=>{
+    if(e.key==='Backspace'&&!d.value&&i>0){fpDigits[i-1].focus();}
+    else if(e.key==='ArrowLeft'&&i>0)fpDigits[i-1].focus();
+    else if(e.key==='ArrowRight'&&i<5)fpDigits[i+1].focus();
+    else if(e.key==='Enter'){e.preventDefault();fpVerify();}
+  });
+  d.addEventListener('paste',e=>{
+    e.preventDefault();
+    const t=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/\D/g,'').slice(0,6);
+    t.split('').forEach((c,j)=>{fpDigits[j].value=c;});
+    fpDigits[Math.min(t.length,5)].focus();
+  });
+});
+
+const fpNew=$('fp-new'),fpConf=$('fp-conf');
+function fpPwOk(){
+  const l=fpNew.value.length>=8,n=/[\d\W_]/.test(fpNew.value);
+  $('fp-pill-len').classList.toggle('ok',l);$('fp-pill-num').classList.toggle('ok',n);return l&&n;
+}
+fpNew.addEventListener('input',()=>{if(fpPwOk())show($('fp-new-err'),false);else fpPwOk();});
+fpConf.addEventListener('input',()=>{if(fpConf.value===fpNew.value)show($('fp-conf-err'),false);});
+$('fp-step3').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const ok=fpPwOk(),match=fpConf.value&&fpConf.value===fpNew.value;
+  show($('fp-new-err'),!ok);show($('fp-conf-err'),!match);
+  if(!ok||!match)return;
+  if(!sb){fpAlert('error',NET_ERR);return;}
+  $('fp-update').disabled=true;show($('fp-update-spin'));$('fp-update-text').textContent='Updating...';
+  let res;
+  try{res=await sb.auth.updateUser({password:fpNew.value});}catch(err){res={error:{message:'network'}};}
+  $('fp-update').disabled=false;show($('fp-update-spin'),false);$('fp-update-text').textContent='Update Password';
+  if(res.error){
+    const m=(res.error.message||'').toLowerCase();
+    if(m==='network')fpAlert('error',NET_ERR);
+    else if(m.includes('session'))fpAlert('error','Your reset session has expired. Please start again.');
+    else if(m.includes('different'))fpAlert('error',"Your new password must be different from your old one.");
+    else fpAlert('error',res.error.message||'Could not update your password. Please try again.');
+    return;}
+  const em=fpEmail||(res.data&&res.data.user&&res.data.user.email)||'';
+  sb.auth.signOut();
+  fpNew.value='';fpConf.value='';fpPwOk();
+  go('signin');$('si-email').value=em;$('si-pass').value='';
+  siAlert('success','Password updated. Sign in with your new password.');
+});
+
+/* opened from the emailed reset link */
+if(sb)sb.auth.onAuthStateChange(ev=>{
+  if(ev==='PASSWORD_RECOVERY'){
+    go('forgot');fpStep(3);
+    history.replaceState(null,'',location.pathname+location.search);
+  }
+});
+
+/* messages from emailed links (confirmation, expired link) */
+if(hashParams.get('error_description')){
+  siAlert('error',hashParams.get('error_code')==='otp_expired'?'That link has expired. Request a new one with "Forgot password?".':hashParams.get('error_description'));
+  history.replaceState(null,'',location.pathname+location.search);
+}else if(hashParams.get('type')==='signup'){
+  siAlert('success','Email confirmed! You can now sign in.');
+  history.replaceState(null,'',location.pathname+location.search);
+}
+/* =====================================================================
+   HOME / APP (shown after sign-in) — data lives in the Supabase `items` table
+   ===================================================================== */
+const CATS=[
+  {v:'Phones & Electronics',icon:'smartphone'},
+  {v:'Student IDs & Cards',icon:'badge'},
+  {v:'Bags & Backpacks',icon:'backpack'},
+  {v:'Keys',icon:'key',label:'Keys & Access Fobs'},
+  {v:'Books & Stationery',icon:'menu_book'},
+  {v:'Clothing & Accessories',icon:'apparel'},
+  {v:'Wallets & Personal Items',icon:'account_balance_wallet'},
+  {v:'Other Items',icon:'category'}
+];
+const BUILDINGS=[
+  {v:'Main Library'},{v:'Student Union'},{v:'Science Complex'},{v:'Engineering Hall'},
+  {v:'Dining Center',label:'Campus Dining Hall'},{v:'Athletic Center'},{v:'Central Bus Stop'}
+];
+const catIcon=c=>(CATS.find(x=>x.v===c)||{icon:'category'}).icon;
+const bldLabel=b=>(BUILDINGS.find(x=>x.v===b)||{label:b}).label||b;
+const PAGE_SIZE=8;
+
+let me=null,items=[],activeItem=null,showAll=false,loadError='';
+let currentFilter={keyword:'',category:'ALL',location:'ALL',status:'ALL'};
+let signingOut=false;
+
+function showToast(message,icon='info'){
+  const c=$('toast-container');
+  const t=document.createElement('div');
+  t.className='pointer-events-auto bg-primary text-on-primary px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 transition-all transform translate-y-2 opacity-0 duration-200';
+  t.innerHTML=`<span class="material-symbols-outlined text-lg">${esc(icon)}</span><span class="font-body-md text-body-md font-medium">${esc(message)}</span>`;
+  c.appendChild(t);
+  requestAnimationFrame(()=>t.classList.remove('translate-y-2','opacity-0'));
+  setTimeout(()=>{t.classList.add('opacity-0','translate-y-2');setTimeout(()=>t.remove(),250);},3500);
+}
+const statusCls=s=>s==='Lost'?'bg-error-container text-on-error-container':s==='Found'?'bg-secondary-fixed text-on-secondary-fixed':'bg-surface-container text-primary';
+function fmtDate(d){
+  if(!d)return '';
+  const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d);
+  const dt=m?new Date(+m[1],+m[2]-1,+m[3]):new Date(d);
+  return isNaN(dt)?String(d):dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+function mapRow(r){
+  return{
+    id:r.id,ref:r.ref||'CF',kind:r.kind,status:r.status,title:r.title,category:r.category,
+    building:r.building,
+    location:bldLabel(r.building)+(r.location_detail?' - '+r.location_detail:''),
+    date:fmtDate(r.incident_date),description:r.description,icon:catIcon(r.category),
+    reportedBy:r.reported_by,reporterName:r.reporter_name||'a student',reporterEmail:r.reporter_email||'',
+  };
+}
+const isMine=it=>me&&it.reportedBy===me.id;
+
+/* ---- data ---- */
+async function loadItems(quiet){
+  if(!sb||!me)return;
+  let res;
+  try{res=await sb.from('items').select('*').order('created_at',{ascending:false});}catch(e){res={error:{message:'network'}};}
+  if(res.error){
+    const m=(res.error.message||'')+' '+(res.error.code||'');
+    loadError=/items|42P01|schema cache|relation/i.test(m)&&!/network/.test(m)
+      ?'The reports table is not set up yet. Run the SQL setup in your Supabase project, then press Refresh.'
+      :NET_ERR;
+    items=[];
+  }else{loadError='';items=(res.data||[]).map(mapRow);}
+  renderAll();
+  if(!quiet&&loadError)showToast('Could not load reports','error');
+}
+function renderAll(){renderItems();updateStats();updateCategoryCounts();}
+
+function updateStats(){
+  const c=s=>items.filter(i=>i.status===s).length;
+  $('stat-total-reports').textContent=items.length;
+  $('stat-lost-items').textContent=c('Lost');
+  $('stat-found-items').textContent=c('Found');
+  $('stat-recovered-items').textContent=c('Recovered');
+  $('hero-recovered').textContent=c('Recovered');
+}
+function updateCategoryCounts(){
+  document.querySelectorAll('.category-card').forEach(card=>{
+    const cat=card.getAttribute('data-cat');
+    const n=items.filter(i=>i.category===cat).length;
+    const sp=[...card.querySelectorAll('span')].find(s=>/^\d+ items?$|^General$/.test(s.textContent.trim()));
+    if(sp)sp.textContent=n+(n===1?' item':' items');
+  });
+}
+
+/* ---- feed ---- */
+function filteredItems(){
+  const k=currentFilter.keyword.toLowerCase();
+  return items.filter(it=>{
+    const mk=!k||it.title.toLowerCase().includes(k)||it.description.toLowerCase().includes(k)||it.location.toLowerCase().includes(k)||it.ref.toLowerCase().includes(k);
+    return mk&&(currentFilter.category==='ALL'||it.category===currentFilter.category)
+      &&(currentFilter.location==='ALL'||it.building===currentFilter.location)
+      &&(currentFilter.status==='ALL'||it.status===currentFilter.status);
+  });
+}
+function renderItems(){
+  const grid=$('items-grid-container'),empty=$('empty-state-container'),badge=$('active-results-indicator');
+  const viewAll=$('view-all-items-trigger'),emptyP=empty.querySelector('p'),emptyH=empty.querySelector('h3');
+  if(loadError){
+    badge.textContent='Could not load reports';
+    grid.innerHTML=`<div class="col-span-full rounded-2xl bg-error-container text-on-error-container p-5 flex items-start gap-3"><span class="material-symbols-outlined">error</span><div class="font-body-md text-body-md">${esc(loadError)}</div></div>`;
+    show(empty,false);show(viewAll.parentElement,false);return;
+  }
+  const f=filteredItems();
+  const vis=showAll?f:f.slice(0,PAGE_SIZE);
+  const filtering=f.length!==items.length;
+  badge.textContent=`Showing ${vis.length} of ${f.length} ${filtering?'matching ':''}items`;
+  if(f.length===0){
+    grid.innerHTML='';show(empty,true);show(viewAll.parentElement,false);
+    if(items.length===0){
+      emptyH.textContent='No Reports Yet';
+      emptyP.textContent='Nothing has been reported so far. Be the first to report a lost or found item.';
+      show($('empty-reset-btn'),false);
+    }else{
+      emptyH.textContent='No Matching Items Found';
+      emptyP.textContent="We couldn't find any reports matching your filters. Try adjusting keywords or clearing the category filter.";
+      show($('empty-reset-btn'),true);
+    }
+    return;
+  }
+  show(empty,false);
+  grid.innerHTML=vis.map(it=>`
+    <div class="group bg-surface-container-lowest rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden">
+      <div>
+        <div class="relative h-44 w-full bg-gradient-to-br from-surface-container to-secondary-fixed/50 flex items-center justify-center overflow-hidden">
+          <span class="material-symbols-outlined text-primary/25 text-[84px] group-hover:scale-110 transition-transform duration-500">${esc(it.icon)}</span>
+          <div class="absolute top-3 left-3 flex items-center gap-1.5">
+            <span class="px-2.5 py-1 rounded-full font-label-sm text-label-sm ${statusCls(it.status)} font-semibold shadow-sm">${esc(it.status)}</span>
+            ${isMine(it)?'<span class="px-2 py-1 rounded-full font-label-sm text-label-sm bg-primary text-on-primary shadow-sm">Your report</span>':''}
+          </div>
+          <div class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface/90 flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-base">${esc(it.icon)}</span></div>
+        </div>
+        <div class="p-4 space-y-2">
+          <span class="font-label-sm text-label-sm text-secondary block uppercase tracking-wider">${esc(it.category)}</span>
+          <h3 class="font-title-lg text-title-lg text-primary font-semibold line-clamp-1 group-hover:text-tertiary-container transition-colors">${esc(it.title)}</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">${esc(it.description)}</p>
+        </div>
+      </div>
+      <div class="p-4 pt-0"><div class="pt-3 flex flex-col gap-2">
+        <div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+          <div class="flex items-center gap-1 truncate max-w-[160px]" title="${esc(it.location)}"><span class="material-symbols-outlined text-sm text-primary">pin_drop</span><span class="truncate">${esc(it.location)}</span></div>
+          <span class="text-secondary whitespace-nowrap">${esc(it.date)}</span>
+        </div>
+        <button data-item-id="${esc(it.id)}" class="view-item-detail-btn w-full mt-1 py-2 rounded-xl bg-surface-container hover:bg-surface-container-highest text-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-1"><span>View Details</span><span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+      </div></div>
+    </div>`).join('');
+  grid.querySelectorAll('.view-item-detail-btn').forEach(b=>b.addEventListener('click',()=>openDetail(b.getAttribute('data-item-id'))));
+  // "View all" button
+  show(viewAll.parentElement,f.length>PAGE_SIZE);
+  viewAll.children[0].textContent=showAll?'Show Fewer Reports':`View All ${f.length} Reports`;
+  viewAll.children[1].textContent=showAll?'expand_less':'expand_more';
+}
+
+/* ---- item detail modal ---- */
+function openDetail(id){
+  const it=items.find(i=>i.id===id);if(!it)return;
+  activeItem=it;
+  $('modal-title').textContent=it.title;
+  const b=$('modal-status-badge');b.textContent=it.status;
+  b.className='inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-label-sm font-semibold '+statusCls(it.status);
+  $('modal-location').textContent=it.location;
+  $('modal-date').textContent=it.date;
+  $('modal-desc').textContent=it.description;
+  $('modal-reference-id').textContent=it.ref;
+  $('modal-category-icon').textContent=it.icon;
+  $('modal-big-icon').textContent=it.icon;
+  $('modal-reporter').textContent=isMine(it)?'you':it.reporterName;
+  const mine=isMine(it);
+  show($('modal-mark-status-btn'),mine);show($('modal-delete-btn'),mine);
+  show($('modal-contact-desk-btn'),!mine&&!!it.reporterEmail);
+  $('modal-status-action-text').textContent=it.status==='Recovered'?'Reopen Report':'Mark as Recovered';
+  show($('item-modal'),true);document.body.style.overflow='hidden';
+}
+function closeDetail(){show($('item-modal'),false);document.body.style.overflow='';activeItem=null;}
+$('modal-close-btn').addEventListener('click',closeDetail);
+$('item-modal').addEventListener('click',e=>{if(e.target.id==='item-modal')closeDetail();});
+
+$('modal-mark-status-btn').addEventListener('click',async()=>{
+  const it=activeItem;if(!it||!isMine(it)||!sb)return;
+  const reopen=it.status==='Recovered';
+  const newStatus=reopen?it.kind:'Recovered';
+  const btn=$('modal-mark-status-btn');btn.disabled=true;
+  let res;
+  try{res=await sb.from('items').update({status:newStatus,recovered_at:reopen?null:new Date().toISOString()}).eq('id',it.id).select();}catch(e){res={error:{message:'network'}};}
+  btn.disabled=false;
+  if(res.error||!res.data||!res.data.length){showToast('Could not update this report. Please try again.','error');return;}
+  it.status=newStatus;
+  showToast(reopen?`Report ${it.ref} reopened as ${it.kind}.`:`Report ${it.ref} marked as Recovered!`,reopen?'refresh':'check_circle');
+  renderAll();closeDetail();
+});
+$('modal-delete-btn').addEventListener('click',async()=>{
+  const it=activeItem;if(!it||!isMine(it)||!sb)return;
+  if(!window.confirm('Delete report '+it.ref+'? This cannot be undone.'))return;
+  let res;
+  try{res=await sb.from('items').delete().eq('id',it.id).select();}catch(e){res={error:{message:'network'}};}
+  if(res.error||!res.data||!res.data.length){showToast('Could not delete this report. Please try again.','error');return;}
+  items=items.filter(x=>x.id!==it.id);
+  showToast(`Report ${it.ref} deleted.`,'delete');
+  renderAll();closeDetail();
+});
+$('modal-contact-desk-btn').addEventListener('click',()=>{
+  const it=activeItem;if(!it||!it.reporterEmail)return;
+  const subj=encodeURIComponent(`CampusFind ${it.ref}: ${it.title}`);
+  const body=encodeURIComponent(`Hi ${it.reporterName},\n\nI'm contacting you about your ${it.kind.toLowerCase()} report ${it.ref} (${it.title}) on CampusFind.\n\n`);
+  showToast('Opening your email app...','mark_email_read');
+  window.location.href=`mailto:${it.reporterEmail}?subject=${subj}&body=${body}`;
+});
+
+/* ---- filters ---- */
+const searchInput=$('filter-search-input'),categorySelect=$('filter-category-select'),locationSelect=$('filter-location-select');
+function applyFilterInputs(){
+  currentFilter.keyword=searchInput.value.trim();
+  currentFilter.category=categorySelect.value;
+  currentFilter.location=locationSelect.value;
+  renderItems();
+}
+searchInput.addEventListener('input',applyFilterInputs);
+categorySelect.addEventListener('change',applyFilterInputs);
+locationSelect.addEventListener('change',applyFilterInputs);
+$('search-trigger-btn').addEventListener('click',()=>{applyFilterInputs();scrollToId('recent-items-section');});
+const statusButtons=[...document.querySelectorAll('.status-toggle-btn')];
+function setStatusPill(st){
+  statusButtons.forEach(b=>{
+    const on=b.getAttribute('data-status')===st;
+    b.classList.toggle('bg-primary',on);b.classList.toggle('text-on-primary',on);
+    b.classList.toggle('bg-surface',!on);b.classList.toggle('text-secondary',!on);
+  });
+}
+statusButtons.forEach(b=>b.addEventListener('click',()=>{
+  currentFilter.status=b.getAttribute('data-status');setStatusPill(currentFilter.status);renderItems();
+}));
+function resetAllFilters(quiet){
+  searchInput.value='';categorySelect.value='ALL';locationSelect.value='ALL';
+  currentFilter={keyword:'',category:'ALL',location:'ALL',status:'ALL'};
+  setStatusPill('ALL');renderItems();
+  if(!quiet)showToast('Filters have been cleared','clear_all');
+}
+$('reset-filters-btn').addEventListener('click',()=>resetAllFilters());
+$('empty-reset-btn').addEventListener('click',()=>resetAllFilters());
+document.querySelectorAll('.category-card').forEach(card=>card.addEventListener('click',()=>{
+  const cat=card.getAttribute('data-cat');
+  categorySelect.value=cat;currentFilter.category=cat;renderItems();
+  scrollToId('recent-items-section');showToast('Filtered by '+cat,'filter_alt');
+}));
+$('reset-feed-data-btn').addEventListener('click',async()=>{
+  await loadItems(true);
+  showToast(loadError?'Could not refresh reports':'Reports refreshed',loadError?'error':'refresh');
+});
+$('view-all-items-trigger').addEventListener('click',()=>{
+  showAll=!showAll;renderItems();
+  if(!showAll)scrollToId('recent-items-section');
+});
+
+/* ---- scrolling & nav ---- */
+function scrollToId(id){
+  const el=$(id);if(!el)return;
+  const y=el.getBoundingClientRect().top+window.pageYOffset-88;
+  window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+}
+function closeMenus(){show($('user-menu'),false);show($('mobile-nav'),false);}
+function goPath(p){
+  closeMenus();
+  if(p==='home')window.scrollTo({top:0,behavior:'smooth'});
+  else if(p==='browse-items')scrollToId('search-section');
+  else if(p==='report-an-item')openReport('Lost');
+  else if(p==='how-it-works')scrollToId('how-it-works');
+  else if(p==='about-us')showAbout();
+  else if(p==='privacy-policy')showDoc('privacy',false);
+  else if(p==='terms-of-service')showDoc('terms',false);
+}
+document.querySelectorAll('#app-root [data-path]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();goPath(a.getAttribute('data-path'));}));
+document.querySelectorAll('#app-root [data-scroll]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();scrollToId(a.getAttribute('data-scroll'));}));
+$('hero-quick-report-btn').addEventListener('click',()=>openReport('Lost'));
+$('cta-report-found-btn').addEventListener('click',()=>openReport('Found'));
+$('mobile-menu-btn').addEventListener('click',e=>{e.stopPropagation();show($('user-menu'),false);$('mobile-nav').classList.toggle('hidden');});
+$('user-menu-btn').addEventListener('click',e=>{e.stopPropagation();show($('mobile-nav'),false);$('user-menu').classList.toggle('hidden');});
+document.addEventListener('click',e=>{
+  if(!$('user-menu').contains(e.target)&&!$('mobile-nav').contains(e.target))closeMenus();
+});
+$('menu-signout-btn').addEventListener('click',()=>doSignOut());
+function showAbout(){
+  openModal(`${icon('info')}<h3 class="text-xl font-semibold text-center">About CampusFind</h3>
+  <p class="text-sm text-on-surface-variant mt-2">CampusFind is a lost and found platform for registered students on campus. Report something you lost or found, browse what others have reported, and contact the person who reported an item to arrange its return.</p>
+  <p class="text-sm text-on-surface-variant mt-2">Accounts are limited to students on the campus registry.</p>
+  <button id="about-ok" class="${btnCls} mt-5">Close</button>`);
+  $('about-ok').onclick=closeModal;
+}
+
+/* ---- report an item ---- */
+function fillSelect(sel,list,ph){
+  sel.innerHTML=`<option value="">${esc(ph)}</option>`+list.map(o=>`<option value="${esc(o.v)}">${esc(o.label||o.v)}</option>`).join('');
+}
+fillSelect($('rp-category'),CATS,'Select a category');
+fillSelect($('rp-building'),BUILDINGS,'Select a location');
+let rpKind='Lost';
+function setKind(k){
+  rpKind=k;
+  [['Lost','rp-kind-lost'],['Found','rp-kind-found']].forEach(([n,id])=>{
+    const on=n===k,b=$(id);
+    b.classList.toggle('bg-primary',on);b.classList.toggle('text-on-primary',on);
+    b.classList.toggle('bg-surface-container-low',!on);b.classList.toggle('text-primary',!on);
+    b.setAttribute('aria-pressed',on);
+  });
+  $('rp-title-label').textContent=k==='Lost'?'What did you lose?':'What did you find?';
+  $('rp-date-label').textContent=k==='Lost'?'Date lost':'Date found';
+  $('rp-loc-label').textContent=k==='Lost'?'Where did you lose it?':'Where did you find it?';
+}
+function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function openReport(kind){
+  closeMenus();
+  $('rp-form').reset();show($('rp-err'),false);
+  $('rp-date').value=todayStr();$('rp-date').max=todayStr();
+  setKind(kind||'Lost');
+  show($('report-modal'),true);document.body.style.overflow='hidden';
+  setTimeout(()=>$('rp-title').focus(),50);
+}
+function closeReport(){show($('report-modal'),false);document.body.style.overflow='';}
+$('rp-kind-lost').addEventListener('click',()=>setKind('Lost'));
+$('rp-kind-found').addEventListener('click',()=>setKind('Found'));
+$('rp-close').addEventListener('click',closeReport);
+$('rp-cancel').addEventListener('click',closeReport);
+$('report-modal').addEventListener('click',e=>{if(e.target.id==='report-modal')closeReport();});
+function rpError(t){$('rp-err').lastElementChild.textContent=t;show($('rp-err'),true);}
+$('rp-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const title=$('rp-title').value.trim(),category=$('rp-category').value,building=$('rp-building').value,
+        spot=$('rp-spot').value.trim(),date=$('rp-date').value,desc=$('rp-desc').value.trim();
+  if(title.length<2)return rpError('Please enter what the item is.');
+  if(!category)return rpError('Please choose a category.');
+  if(!building)return rpError('Please choose a location.');
+  if(!date||date>todayStr())return rpError('Please enter a valid date (not in the future).');
+  if(desc.length<5)return rpError('Please add a short description (at least 5 characters).');
+  show($('rp-err'),false);
+  if(!sb||!me)return rpError(NET_ERR);
+  const md=me.user_metadata||{};
+  $('rp-submit').disabled=true;show($('rp-spin'));$('rp-text').textContent='Submitting...';
+  let res;
+  try{res=await sb.from('items').insert({kind:rpKind,status:rpKind,title,category,building,location_detail:spot||null,incident_date:date,description:desc,reporter_name:md.full_name||null,reporter_email:me.email||null}).select().single();}
+  catch(err){res={error:{message:'network'}};}
+  $('rp-submit').disabled=false;show($('rp-spin'),false);$('rp-text').textContent='Submit Report';
+  if(res.error||!res.data){
+    const m=(res.error&&res.error.message||'');
+    return rpError(/items|schema cache|relation/i.test(m)?'The reports table is not set up yet. Run the SQL setup in Supabase first.':'Could not submit your report. Please check your connection and try again.');
+  }
+  items.unshift(mapRow(res.data));
+  closeReport();resetAllFilters(true);renderAll();
+  showToast(`${rpKind} report ${res.data.ref} submitted!`,'check_circle');
+  scrollToId('recent-items-section');
+});
+
+/* ---- terms / privacy for the footer (no "I Agree" inside the app) ---- */
+/* showDoc is defined with the sign-up terms code */
+
+/* ---- enter / leave the app ---- */
+function enterApp(user){
+  me=user;signingOut=false;
+  const md=user.user_metadata||{};
+  $('hdr-name').textContent=md.full_name||user.email;
+  $('hdr-sub').textContent=md.student_id||user.email;
+  $('menu-email').textContent=user.email||'';
+  show($('auth-root'),false);show($('app-root'),true);
+  closeModal();closeMenus();
+  window.scrollTo(0,0);
+  resetAllFilters(true);showAll=false;
+  loadItems();
+}
+function leaveApp(msg,kind){
+  me=null;items=[];activeItem=null;
+  closeDetail();closeReport();closeMenus();closeModal();
+  show($('app-root'),false);show($('auth-root'),true);
+  go('signin');$('si-form').reset();siHide();
+  if(msg)siAlert(kind||'success',msg);
+  restoreRemember();
+  window.scrollTo(0,0);
+}
+async function doSignOut(){
+  signingOut=true;
+  try{if(sb)await sb.auth.signOut();}catch(e){}
+  leaveApp('You have been signed out.');
+}
+if(sb)sb.auth.onAuthStateChange(ev=>{
+  if(ev==='SIGNED_OUT'&&me&&!signingOut)leaveApp('Your session has ended. Please sign in again.','error');
+});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&me)loadItems(true);});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  if(!$('item-modal').classList.contains('hidden'))closeDetail();
+  if(!$('report-modal').classList.contains('hidden'))closeReport();
+  closeMenus();
+});
+
+/* ---- restore an existing session on page load ---- */
+const isLinkLoad=['recovery','signup'].includes(hashParams.get('type'))||!!hashParams.get('error_description');
+if(sb){
+  if(!isLinkLoad){
+    sb.auth.getSession().then(({data})=>{if(data&&data.session&&!me)enterApp(data.session.user);}).catch(()=>{});
+  }else if(hashParams.get('type')==='signup'){
+    sb.auth.getSession().then(()=>sb.auth.signOut()).catch(()=>{});
+  }
+}
+
+})();
+</script>
+</body></html>
