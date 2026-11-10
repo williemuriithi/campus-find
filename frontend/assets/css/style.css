@@ -1,0 +1,17 @@
+/* CampusFind styles */
+body{font-family:Inter,sans-serif;overscroll-behavior:none}
+h1,h2,h3{font-family:Epilogue,sans-serif}
+.material-symbols-outlined{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;line-height:1;display:inline-block;letter-spacing:normal;white-space:nowrap}
+.ms{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;line-height:1;display:inline-block;letter-spacing:normal;white-space:nowrap}
+.hidden{display:none!important}
+.inp{width:100%;height:46px;padding:0 12px 0 40px;border-radius:12px;background:#f0f3ff;font-size:14px;outline:none;transition:.15s;border:1px solid transparent}
+.inp:focus{background:#fff;border-color:#6f4e3744;box-shadow:0 0 0 3px #55372215}
+.inp.bad{background:#ffdad666;border-color:#ba1a1a66}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:9999px;font-size:11px;font-weight:500;background:#e7eefe;color:#50453e;transition:.2s}
+.pill.ok{background:#ffdea9;color:#271900}
+.err{color:#ba1a1a;font-size:12px;display:flex;align-items:center;gap:4px;margin-top:2px}
+.chk{width:20px;height:20px;appearance:none;border-radius:5px;border:1.5px solid #82746d;background:#fff;cursor:pointer;flex-shrink:0}
+.chk:checked{background:#553722;border-color:#553722}
+.otp{width:44px;height:52px;text-align:center;font-size:20px;font-weight:600;border-radius:10px;background:#f0f3ff;border:1px solid transparent;outline:none;transition:.15s}
+.otp:focus{background:#fff;border-color:#6f4e3744;box-shadow:0 0 0 3px #55372215}
+.otp.bad{background:#ffdad666;border-color:#ba1a1a66}
